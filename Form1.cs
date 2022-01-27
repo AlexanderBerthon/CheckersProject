@@ -14,8 +14,12 @@ namespace CheckersProject {
             InitializeComponent();
         }
 
-        //button action.
-        /*
+        private void button_Click(object sender, EventArgs e) {
+
+        }
+
+		//button action.
+		/*
         click the first cell, store the button location. 
         click the second cell
             - compare the two button locations/adresses
@@ -55,22 +59,72 @@ namespace CheckersProject {
         how do you write the button logic to allow users to even play? if you click? If you click once, on the first tile.
         the entire event runs?
 
-        on click(){
-            if firstbutton == null
-                set first button = this.first button
-            else
-                actual logic
-                ...
-                if(capture successful and additonal capture can be made){
-                    firstbutton = second button?
-                    if(user clicks the end turn button){
-                        first button = null;
-                    else
-                    let the user go again, but only if they can make a second capture. you can't just give them a normal
-                    turn because they have to chain them if they want to use the second turn.
-                    they can't for example make a capture then move to the left and avoid danger.
-                    
-                firstbutton = null;
+		//psudocode
+        Gridbutton_clicked(){
+			if this button is already highlighted
+				if(another turn is true)
+					- "you may move again with this tile or end turn"
+				else
+					- unhighlight this button //misclick, changed mind, etc. 
+			if this button isn't highlighted, but there is another button highlighted
+				- check if valid move
+					- check background picture
+						- if no picture, invalid move. no piece to move
+						- if red pawn, can only move up, left, right, up-left, up-right
+						- if black pawn, can only move down, left, right, up-left, up-right
+						- if king, can move any direction
+					- check distance
+						- if destination tile is adjacent to highlighted tile
+							- check destination tile background picture
+								- if background pic exists, invalid move
+								- else check direction is valid given it's background picture identifier
+									- if direction is valid
+										- unhighlight old button
+										- remove background picture from old button
+										- add correct background picture to destination button
+										- end turn
+									- else invalid move
+						- if destination tile is not adjacent but within '2' tiles of highlighted tile
+							- check destination tile background picture
+								- if background picture exists, invalid move
+							- check tile 'in-between' highlighted tile and destination tile for background picture
+								- if background picture does not exist, invalid move
+								- if it does exist but is the same color as player tile, invalid move
+								- if it does exist and it is the opposite color as the player tile
+									- remove background image for tile 'in-between'
+									- give the player that made the play a point
+									- remove highlight from highlighted button
+									- put background image at destination button
+									- scan destination tile for all possible moves it can make
+										- if there exists a play / chance for another jump (destination tile has a valid directional move 2 spaces away from it self that has an enemy tile in-between and free landing space) continue turn
+											- swap highlight to destination
+											- don't allow the user to unhighlight it somehow.. flag? another turn?
+											//if they hit the "end turn" button early then you can unhighlight it there
+										- else end turn
+						- if destination tile is further than 2 tiles away //else
+							- invalid move	
+			if this isn't highlighted and there aren't any other buttons highlighted
+				- highlight this button
+		Endturn_clicked(){
+		 - clear local variables
+		 - clear button highlights
+		 - end turn flag
+		 - disable buttons 
+		 - run code for AI play here
+			...
+		 - animate AI play somehow or highlight briefly and wait()?
+		 - unlock buttons
+		 - flag user turn
+		 - 
+
+		}
+main.
+run program
+loop program while (gameover = false)
+	- player turn //access to UI elements
+		- end turn // disable buttons
+	- cpu turn //auto play
+	- check win condition
         */
 
 
@@ -78,5 +132,5 @@ namespace CheckersProject {
 
 
 
-    }
+	}
 }
