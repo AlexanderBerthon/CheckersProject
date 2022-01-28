@@ -15,7 +15,8 @@ namespace CheckersProject {
         }
 
         private void button_Click(object sender, EventArgs e) {
-
+			Button button = (Button)sender;
+			label1.Text = button.BackgroundImage.ToString();
         }
 
 		//button action.
