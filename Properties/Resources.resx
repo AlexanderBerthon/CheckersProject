@@ -121,25 +121,13 @@
   <data name="RCoin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RCoin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RKing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RKing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BKing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BKing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BCoin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BCoin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BCoin3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BCoin31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BKing3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BKing31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RCoin3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RCoin31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RKing3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RKing31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RKing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RKing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

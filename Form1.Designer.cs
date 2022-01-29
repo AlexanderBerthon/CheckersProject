@@ -192,6 +192,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(40, 40);
             this.button2.TabIndex = 1;
+            this.button2.Tag = "RCoin";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button_Click);
             // 
@@ -221,6 +222,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(40, 40);
             this.button4.TabIndex = 3;
+            this.button4.Tag = "RCoin";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button_Click);
             // 
@@ -250,6 +252,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(40, 40);
             this.button6.TabIndex = 5;
+            this.button6.Tag = "RCoin";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button_Click);
             // 
@@ -279,6 +282,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(40, 40);
             this.button8.TabIndex = 7;
+            this.button8.Tag = "RCoin";
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button_Click);
             // 
@@ -294,6 +298,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(40, 40);
             this.button9.TabIndex = 8;
+            this.button9.Tag = "RCoin";
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button_Click);
             // 
@@ -323,6 +328,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(40, 40);
             this.button11.TabIndex = 10;
+            this.button11.Tag = "RCoin";
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.button_Click);
             // 
@@ -352,6 +358,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(40, 40);
             this.button13.TabIndex = 12;
+            this.button13.Tag = "RCoin";
             this.button13.UseVisualStyleBackColor = false;
             this.button13.Click += new System.EventHandler(this.button_Click);
             // 
@@ -381,6 +388,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(40, 40);
             this.button15.TabIndex = 14;
+            this.button15.Tag = "RCoin";
             this.button15.UseVisualStyleBackColor = false;
             this.button15.Click += new System.EventHandler(this.button_Click);
             // 
@@ -424,6 +432,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(40, 40);
             this.button18.TabIndex = 17;
+            this.button18.Tag = "RCoin";
             this.button18.UseVisualStyleBackColor = false;
             this.button18.Click += new System.EventHandler(this.button_Click);
             // 
@@ -453,6 +462,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(40, 40);
             this.button20.TabIndex = 19;
+            this.button20.Tag = "RCoin";
             this.button20.UseVisualStyleBackColor = false;
             this.button20.Click += new System.EventHandler(this.button_Click);
             // 
@@ -482,6 +492,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(40, 40);
             this.button22.TabIndex = 21;
+            this.button22.Tag = "RCoin";
             this.button22.UseVisualStyleBackColor = false;
             this.button22.Click += new System.EventHandler(this.button_Click);
             // 
@@ -511,6 +522,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(40, 40);
             this.button24.TabIndex = 23;
+            this.button24.Tag = "RCoin";
             this.button24.UseVisualStyleBackColor = false;
             this.button24.Click += new System.EventHandler(this.button_Click);
             // 
@@ -750,6 +762,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(40, 40);
             this.button41.TabIndex = 40;
+            this.button41.Tag = "BCoin";
             this.button41.UseVisualStyleBackColor = false;
             this.button41.Click += new System.EventHandler(this.button_Click);
             // 
@@ -779,6 +792,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(40, 40);
             this.button43.TabIndex = 42;
+            this.button43.Tag = "BCoin";
             this.button43.UseVisualStyleBackColor = false;
             this.button43.Click += new System.EventHandler(this.button_Click);
             // 
@@ -808,6 +822,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(40, 40);
             this.button45.TabIndex = 44;
+            this.button45.Tag = "BCoin";
             this.button45.UseVisualStyleBackColor = false;
             this.button45.Click += new System.EventHandler(this.button_Click);
             // 
@@ -837,6 +852,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(40, 40);
             this.button47.TabIndex = 46;
+            this.button47.Tag = "BCoin";
             this.button47.UseVisualStyleBackColor = false;
             this.button47.Click += new System.EventHandler(this.button_Click);
             // 
@@ -880,6 +896,7 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(40, 40);
             this.button50.TabIndex = 49;
+            this.button50.Tag = "BCoin";
             this.button50.UseVisualStyleBackColor = false;
             this.button50.Click += new System.EventHandler(this.button_Click);
             // 
@@ -909,6 +926,7 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(40, 40);
             this.button52.TabIndex = 51;
+            this.button52.Tag = "BCoin";
             this.button52.UseVisualStyleBackColor = false;
             this.button52.Click += new System.EventHandler(this.button_Click);
             // 
@@ -938,6 +956,7 @@
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(40, 40);
             this.button54.TabIndex = 53;
+            this.button54.Tag = "BCoin";
             this.button54.UseVisualStyleBackColor = false;
             this.button54.Click += new System.EventHandler(this.button_Click);
             // 
@@ -967,6 +986,7 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(40, 40);
             this.button56.TabIndex = 55;
+            this.button56.Tag = "BCoin";
             this.button56.UseVisualStyleBackColor = false;
             this.button56.Click += new System.EventHandler(this.button_Click);
             // 
@@ -982,6 +1002,7 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(40, 40);
             this.button57.TabIndex = 56;
+            this.button57.Tag = "BCoin";
             this.button57.UseVisualStyleBackColor = false;
             this.button57.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1011,6 +1032,7 @@
             this.button59.Name = "button59";
             this.button59.Size = new System.Drawing.Size(40, 40);
             this.button59.TabIndex = 58;
+            this.button59.Tag = "BCoin";
             this.button59.UseVisualStyleBackColor = false;
             this.button59.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1040,6 +1062,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(40, 40);
             this.button61.TabIndex = 60;
+            this.button61.Tag = "BCoin";
             this.button61.UseVisualStyleBackColor = false;
             this.button61.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1069,6 +1092,7 @@
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(40, 40);
             this.button63.TabIndex = 62;
+            this.button63.Tag = "BCoin";
             this.button63.UseVisualStyleBackColor = false;
             this.button63.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1089,7 +1113,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(136, -4);
+            this.label1.Location = new System.Drawing.Point(154, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
