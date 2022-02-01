@@ -655,7 +655,6 @@
             // button34
             // 
             this.button34.BackColor = System.Drawing.Color.Black;
-            this.button34.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button34.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button34.FlatAppearance.BorderSize = 0;
             this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -664,7 +663,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(40, 40);
             this.button34.TabIndex = 34;
-            this.button34.Tag = "RCoin";
+            this.button34.Tag = "";
             this.button34.UseVisualStyleBackColor = false;
             this.button34.Click += new System.EventHandler(this.button_Click);
             // 
@@ -721,6 +720,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(40, 40);
             this.button38.TabIndex = 38;
+            this.button38.Tag = "";
             this.button38.UseVisualStyleBackColor = false;
             this.button38.Click += new System.EventHandler(this.button_Click);
             // 
@@ -845,7 +845,7 @@
             // button47
             // 
             this.button47.BackColor = System.Drawing.Color.Black;
-            this.button47.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button47.BackgroundImage")));
+            this.button47.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button47.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button47.FlatAppearance.BorderSize = 0;
             this.button47.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -854,7 +854,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(40, 40);
             this.button47.TabIndex = 47;
-            this.button47.Tag = "BCoin";
+            this.button47.Tag = "RCoin";
             this.button47.UseVisualStyleBackColor = false;
             this.button47.Click += new System.EventHandler(this.button_Click);
             // 
