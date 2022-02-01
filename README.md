@@ -1,29 +1,38 @@
 # CheckersProject
-This project will attempt to replicate the game "Checkers" using the matrix grid framework I created in the Matrix Project.
-
-To Do for MVP:
-<li>Create UI checkerboard design (icons, background images, etc.)</li>
-<li>Implement checkerboard front end (button grid / layout / etc.)</li>
-<li>Gameplay</li>
-  <li>Player Controls
-    <li>- pawn movement</li>
-    <li>- pawn capture</li>
-    <li>- king movement</li>
-    <li>- king capture</li>
-    <li>- player turn</li>
-    <li>- player multi-turn moves</li>
-    <li>- player points</li>
-  <li>AI Controls</li>
-    <li>- pawn movement</li>
-    <li>- pawn capture</li>
-    <li>- king movement</li>
-    <li>- king capture</li>
-    <li>- AI turn</li>
-    <li>- AI multi-turn moves</li>
-    <li>- AI points</li>
-  <li>Main Game Loop</li>
-    <li>- Game over</li>
-    <li>- Win condition</li>
-    <li>- Turn loop</li>
+<html>
+  <section>
+    <h2>This project will attempt to replicate the game "Checkers"</h2>
+  </section>
+  <section>
+    <ul>To Do for MVP:
+      <ul>Create UI checkerboard design (icons, background images, etc.)</ul>
+      <ul>Implement checkerboard front end (button grid / layout / etc.)</ul>
+      <ul>Gameplay
+        <ul>Player Controls
+          <ul>pawn movement</ul>
+          <ul>pawn capture</ul>
+          <ul>king movement</ul>
+          <ul>king capture</ul>
+          <ul>player turn</ul>
+          <ul>player multi-turn moves</ul>
+          <ul>player points</ul>
+      </ul>
+      <ul>AI Controls
+        <ul>pawn movement</ul>
+        <ul>pawn capture</ul>
+        <ul>king movement</ul>
+        <ul>king capture</ul>
+        <ul>AI turn</ul>
+        <ul>AI multi-turn moves</ul>
+        <ul>AI points</ul>
+      </ul>
+      <ul>Main Game Loop
+        <ul>Game over</ul>
+        <ul>Win condition</ul>
+        <ul>Turn loop</ul>
+  </section>
+  <section> 
+  *This is a very simplified list of necessary functionality for visibility's sake. More details found in commit messages.* 
+  </section>
+</html>
     
-*This is a very simplified list of necessary functionality for visibility's sake. More details found in commit messages.* 
