@@ -7,15 +7,95 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//flowLayoutPanel1.Controls.CopyTo(buttonArray, 0);
 namespace CheckersProject {
     public partial class Form1 : Form {
+		//Global Variables! I'm sorry!!
+		Button selected;
         public Form1() {
             InitializeComponent();
+			selected = null;
         }
 
         private void button_Click(object sender, EventArgs e) {
 			Button button = (Button)sender;
+			if (selected == null) {
+				if(button.BackgroundImage == null || button.Tag == "RCoin" || button.Tag == "RKing") {
+					label1.Text = "Invalid Selection";
+                }
+                else{
+					selected = button;
+					button.FlatStyle = FlatStyle.Standard;
+				}
+			}
+			else if (selected == button) { //undo first click, misclick, etc. 
+				selected.FlatStyle = FlatStyle.Flat;
+				selected = null;
+			}
+			else {
+				Boolean validMove = false;
+				//valid move check for cells in far left column
+				if (selected.TabIndex % 8 == 1) {
+					label1.Text = "reeeeeeeeee";
+					if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
+						validMove = true;
+					}
+					//if target is in range, and landing zone is clear, and there is an enemy piece inbetween
+					else if(selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
+						label1.Text = "Victory is Sweet";
+						if (flowLayoutPanel1.Controls[33].Tag == "RCoin") {
+							label1.Text = "But Honor is Sweeter";
+							flowLayoutPanel1.Controls[33].BackgroundImage = null;
+							//add point
+							validMove = true;
+						}
+					}
+                    else {
+						validMove = false;
+                    }
+				}
+				//valid move check for cells in far right column
+				else if (selected.TabIndex % 8 == 0) {
+					if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
+						validMove = true;
+					}
+					//if target is in range, and landing zone is clear, and there is an enemy piece inbetween
+					else if (selected.TabIndex == button.TabIndex + 16 && button.BackgroundImage != null && flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "RCoin") {
+						validMove = true;
+					}
+					else {
+						validMove = false;
+					}
+				}
+				//valid move check for all other cells
+				else if(selected.TabIndex == (button.TabIndex + 7) || selected.TabIndex == (button.TabIndex + 9)) {
+					label1.Text = "wat";
+					if(button.BackgroundImage == null) {
+						validMove = true;
+					}
+					else {
+						validMove = false;
+					}
+				}
+				//invalid move
+                else {
+					validMove = false;
+                }
+
+
+				if (validMove) {
+					button.BackgroundImage = selected.BackgroundImage;
+					button.Tag = selected.Tag;
+					selected.FlatStyle = FlatStyle.Flat;
+					selected.BackgroundImage = null;
+					selected.Tag = null;
+					selected = null;
+					//end turn
+				}
+				else {
+					//label1.Text = "Invalid Move";
+				}
+			}
         }
 
 		//button action.
@@ -103,6 +183,8 @@ namespace CheckersProject {
 										- else end turn
 						- if destination tile is further than 2 tiles away //else
 							- invalid move	
+						- check at the end of all this. if destination tile = enemy backline / coords depend on team color
+							- promote piece to king/change tag
 			if this isn't highlighted and there aren't any other buttons highlighted
 				- highlight this button
 		Endturn_clicked(){
