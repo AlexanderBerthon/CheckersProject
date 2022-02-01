@@ -5,12 +5,12 @@
   </section>
   <section>
     <ul>To Do for MVP:
-      <ul>Create UI checkerboard design (icons, background images, etc.)</ul>
-      <ul>Implement checkerboard front end (button grid / layout / etc.)</ul>
+      <ul><s>Create UI checkerboard design (icons, background images, etc.)</s></ul>
+      <ul><s>Implement checkerboard front end (button grid / layout / etc.)</s></ul>
       <ul>Gameplay
         <ul>Player Controls
-          <ul>pawn movement</ul>
-          <ul>pawn capture</ul>
+          <ul><s>pawn movement</s></ul>
+          <ul><s>pawn capture</s></ul>
           <ul>king movement</ul>
           <ul>king capture</ul>
           <ul>player turn</ul>
