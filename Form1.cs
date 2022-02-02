@@ -7,38 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//flowLayoutPanel1.Controls.CopyTo(buttonArray, 0);
+
+/*
+ * REMEMBER OFF BY 1 ERRORS: Anytime you reference flowLayout1, layout will be -1. button = 10 layout thinks it's 9 
+ * but they will modify the SAME button. just different reference. keep that in mind!
+	raw capture values - AI (top to bottom)
+	//7, 9 - adjacent(left, right)
+	//14, 18 - target(left, right)
+ */
+
 namespace CheckersProject {
     public partial class Form1 : Form {
 		//Global Variables! I'm sorry!!
 		Button selected;
 		Boolean playerTurn;
-		Button[] AIPieces;
+		List<Button> AIPieces;
+		Button[] temp;
+
+
 		public Form1() {
 			InitializeComponent();
 			selected = null;
 			playerTurn = true;
-			AIPieces = new Button[64];
-			flowLayoutPanel1.Controls.CopyTo(AIPieces, 0);
+			AIPieces = new List<Button>();
+
+			temp = new Button[64];
+			flowLayoutPanel1.Controls.CopyTo(temp, 0);
 		}
-			/*this is really scuffed..
-						tab index starts at 0
-						but if I do that, then there isn't any way to distinguish special cases like top/bot/left/right
-						if I start tab index at 1
-						then I can easily separate these columns and rows by doing a currentIndex%8
-						then the left col = 1, right col = 0, top and bot can be separated by range
-						but
-						some functions like flowlayout.controls reads data as if the containers are still 0-63
-						even though I changed the values to 1-64
-						meaning there is a discrepency in the code that makes no sense
-						functions accessing the same location can point to different locations //off by 1 
-						if I am referencing a button via click, it's address is 1
-						if I am referencing the SAME button via flowlayout, it's address is 0
-						so I can get it to work, but it is scuffed.
-						*/
-
-
-			private void button_Click(object sender, EventArgs e) {
+		
+		private void button_Click(object sender, EventArgs e) {
 			if (playerTurn) {
 				Button button = (Button)sender;
 				if (selected == null) {
@@ -68,6 +65,7 @@ namespace CheckersProject {
 							if (flowLayoutPanel1.Controls[selected.TabIndex - 8].Tag == "RCoin") {
 								label1.Text = "left column, good capture right";
 								flowLayoutPanel1.Controls[selected.TabIndex - 8].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex - 8].Tag = null;
 								//player1Points++
 								validMove = true;
 							}
@@ -88,6 +86,7 @@ namespace CheckersProject {
 							if (flowLayoutPanel1.Controls[selected.TabIndex - 10].Tag == "RCoin") {
 								label1.Text = "right column, good capture left";
 								flowLayoutPanel1.Controls[selected.TabIndex - 10].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex - 10].Tag = null;
 								//player1Points++
 								validMove = true;
 							}
@@ -110,6 +109,7 @@ namespace CheckersProject {
 						if (flowLayoutPanel1.Controls[selected.TabIndex - 10].Tag == "RCoin") {
 							label1.Text = "good capture left";
 							flowLayoutPanel1.Controls[selected.TabIndex - 10].BackgroundImage = null;
+							flowLayoutPanel1.Controls[selected.TabIndex - 10].Tag = null;
 							//player1Points++
 							validMove = true;
 						}
@@ -119,6 +119,7 @@ namespace CheckersProject {
 						if (flowLayoutPanel1.Controls[selected.TabIndex - 8].Tag == "RCoin") {
 							label1.Text = "good capture right";
 							flowLayoutPanel1.Controls[selected.TabIndex - 8].BackgroundImage = null;
+							flowLayoutPanel1.Controls[selected.TabIndex - 8].Tag = null;
 							//player1Points++
 							validMove = true;
 						}
@@ -145,88 +146,86 @@ namespace CheckersProject {
 		}
 	
 		public void AITurn() {
-			this.Refresh(); //since I am calling this method within the click action, I have to manually repaint. I think.. or I am doing something horribly wrong
+			this.Refresh(); //must repaint manually, since this is called within a single click action
 			System.Threading.Thread.Sleep(1000);
 
-			//i don't know how to do a foreach statement reee
-			//SUPER messy, can maybe make a helper method to reduce repeated code..
-			List<Button> pieces = new List<Button>();
-
-			//this does work, but raises some questions
-			//either
-			//1) I MUST keep an UPDATED array of buttons of the entire 64 button gameboard with newest info each turn
-			//2) I make this AI button list global, copy once and remove all other empy buttons, and maintain it by
-			//	finding a way to remove and replace the button entries, keeping them in order, and accurate
-			//
-			// in order to feed valid information into the AIPlay function
-			//
-			// one major major issue that I am worried about also is the range. if I get a black piece to the bottom 2 rows
-			// or a black piece to the top 2 rows, the program will crash because it is looking 2 rows above for a possible
-			// capture play. this will cause an out of range exception
-			// so I will have to add an exception or come up with a more intelligent solution to my AIPlay algorithm.
-			foreach(Button button in AIPieces) {
-				if (button.Tag == "RCoin") { // ||button.Tag != "RKing"
-					pieces.Add(button);
-				}
-            }
-
-			/*
-            foreach (Button button in AIPieces) {
-				if(button.TabIndex % 8 == 1
-				&& flowLayoutPanel1.Controls[selected.TabIndex + 18].BackgroundImage == null
-				&& flowLayoutPanel1.Controls[selected.TabIndex + 10].Tag == "BCoin") {	
-					label1.Text = "good capture right";
-					flowLayoutPanel1.Controls[selected.TabIndex + 10].BackgroundImage = null;
-					//AIPoints++
-					flowLayoutPanel1.Controls[selected.TabIndex + 18].BackgroundImage = button.BackgroundImage;
-					flowLayoutPanel1.Controls[selected.TabIndex + 18].Tag = button.Tag;
-					button.BackgroundImage = null;
-					button.Tag = null;
-					playerTurn = true;
-					break;
-				}
-				else if (button.TabIndex % 8 == 0
-				&& flowLayoutPanel1.Controls[selected.TabIndex + 14].BackgroundImage == null
-				&& flowLayoutPanel1.Controls[selected.TabIndex + 8].Tag == "BCoin") {
-					label1.Text = "good capture left";
-					flowLayoutPanel1.Controls[selected.TabIndex + 8].BackgroundImage = null;
-					//AIPoints++
-					flowLayoutPanel1.Controls[selected.TabIndex + 14].BackgroundImage = button.BackgroundImage;
-					flowLayoutPanel1.Controls[selected.TabIndex + 14].Tag = button.Tag;
-					button.BackgroundImage = null;
-					button.Tag = null;
-					playerTurn = true;
-					break;
-				}
-				else if (flowLayoutPanel1.Controls[selected.TabIndex + 14].BackgroundImage == null
-				&& flowLayoutPanel1.Controls[selected.TabIndex + 8].Tag == "BCoin") {
-					label1.Text = "good capture left";
-					flowLayoutPanel1.Controls[selected.TabIndex + 8].BackgroundImage = null;
-					//AIPoints++
-					flowLayoutPanel1.Controls[selected.TabIndex + 14].BackgroundImage = button.BackgroundImage;
-					flowLayoutPanel1.Controls[selected.TabIndex + 14].Tag = button.Tag;
-					button.BackgroundImage = null;
-					button.Tag = null;
-					playerTurn = true;
-					break;
-				}
-				else if (flowLayoutPanel1.Controls[selected.TabIndex + 18].BackgroundImage == null
-				&& flowLayoutPanel1.Controls[selected.TabIndex + 10].Tag == "BCoin") {
-					label1.Text = "good capture right";
-					flowLayoutPanel1.Controls[selected.TabIndex + 10].BackgroundImage = null;
-					//AIPoints++
-					flowLayoutPanel1.Controls[selected.TabIndex + 18].BackgroundImage = button.BackgroundImage;
-					flowLayoutPanel1.Controls[selected.TabIndex + 18].Tag = button.Tag;
-					button.BackgroundImage = null;
-					button.Tag = null;
-					playerTurn = true;
-					break;
+			flowLayoutPanel1.Controls.CopyTo(temp, 0); //does this override previous entries? or cause an exception??
+			foreach (Button button in temp) {
+				if (button.Tag == "RCoin") {
+					AIPieces.Add(button);
 				}
 			}
-			*/
 
-			
+			//is there a way to condense this? pass in arguments into a helper method? 
+			try {
+				foreach (Button button in AIPieces) {
+					//if piece is in column 1 or 2, can only attempt right-sided capture.
+					if ((button.TabIndex % 8 == 1 ||button.TabIndex % 8 == 2)
+					&& flowLayoutPanel1.Controls[button.TabIndex + 17].BackgroundImage == null
+					&& flowLayoutPanel1.Controls[button.TabIndex + 8].Tag == "BCoin") {
+						label1.Text = "good-capture-right (exception)";
+						flowLayoutPanel1.Controls[button.TabIndex + 8].BackgroundImage = null;
+						flowLayoutPanel1.Controls[button.TabIndex + 8].Tag = null;
+						//AIPoints++
+						flowLayoutPanel1.Controls[button.TabIndex + 17].BackgroundImage = button.BackgroundImage;
+						flowLayoutPanel1.Controls[button.TabIndex + 17].Tag = button.Tag;
+						button.BackgroundImage = null;
+						button.Tag = null;
+						playerTurn = true;
+						break;
+					}
+					//if piece is in column 7 or 8 can only attempt left-sided capture.
+					else if ((button.TabIndex % 8 == 7 || button.TabIndex % 8 == 0)
+					&& flowLayoutPanel1.Controls[button.TabIndex + 13].BackgroundImage == null
+					&& flowLayoutPanel1.Controls[button.TabIndex + 6].Tag == "BCoin") {
+						label1.Text = "good-capture-left (exception)";
+						flowLayoutPanel1.Controls[button.TabIndex + 6].BackgroundImage = null;
+						flowLayoutPanel1.Controls[button.TabIndex + 6].Tag = null;
+						//AIPoints++
+						flowLayoutPanel1.Controls[button.TabIndex + 13].BackgroundImage = button.BackgroundImage;
+						flowLayoutPanel1.Controls[button.TabIndex + 13].Tag = button.Tag;
+						button.BackgroundImage = null;
+						button.Tag = null;
+						playerTurn = true;
+						break;
+					}
+					//check if piece can make a left capture
+					else if (flowLayoutPanel1.Controls[button.TabIndex + 13].BackgroundImage == null
+					&& flowLayoutPanel1.Controls[button.TabIndex + 6].Tag == "BCoin") {
+						label1.Text = "good-capture-left (normal)";
+						flowLayoutPanel1.Controls[button.TabIndex + 6].BackgroundImage = null;
+						flowLayoutPanel1.Controls[button.TabIndex + 6].Tag = null;
+						//AIPoints++
+						flowLayoutPanel1.Controls[button.TabIndex + 13].BackgroundImage = button.BackgroundImage;
+						flowLayoutPanel1.Controls[button.TabIndex + 13].Tag = button.Tag;
+						button.BackgroundImage = null;
+						button.Tag = null;
+						playerTurn = true;
+						break;
+					}
+					//check if piece can make a right capture
+					else if (flowLayoutPanel1.Controls[button.TabIndex + 17].BackgroundImage == null
+					&& flowLayoutPanel1.Controls[button.TabIndex + 8].Tag == "BCoin") {
+						label1.Text = "good-capture-right (normal)";
+						flowLayoutPanel1.Controls[button.TabIndex + 8].BackgroundImage = null;
+						flowLayoutPanel1.Controls[button.TabIndex + 8].Tag = null;
+						//AIPoints++
+						flowLayoutPanel1.Controls[button.TabIndex + 17].BackgroundImage = button.BackgroundImage;
+						flowLayoutPanel1.Controls[button.TabIndex + 17].Tag = button.Tag;
+						button.BackgroundImage = null;
+						button.Tag = null;
+						playerTurn = true;
+						break;
+					}
+				}
+			}
+            catch(ArgumentOutOfRangeException e) {
+				//temporary error handler for testing purposes. flag var here to end AICapture and start normal AIMove
+				//when I get there
+				label1.Text = "Index out of range!";
+            }
 
+			AIPieces.Clear();
 			//label1.Text = "done sleeping!";
 			playerTurn = true;
         }

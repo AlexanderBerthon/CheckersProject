@@ -557,6 +557,7 @@
             // button27
             // 
             this.button27.BackColor = System.Drawing.Color.Black;
+            this.button27.BackgroundImage = global::CheckersProject.Properties.Resources.BCoin;
             this.button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button27.FlatAppearance.BorderSize = 0;
             this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -565,6 +566,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(40, 40);
             this.button27.TabIndex = 27;
+            this.button27.Tag = "BCoin";
             this.button27.UseVisualStyleBackColor = false;
             this.button27.Click += new System.EventHandler(this.button_Click);
             // 
