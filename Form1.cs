@@ -177,6 +177,17 @@ namespace CheckersProject {
 			}
 		}
 	
+		public void AICapture(Button start, int middle, int end) {
+			flowLayoutPanel1.Controls[start.TabIndex +middle].BackgroundImage = null;
+			flowLayoutPanel1.Controls[start.TabIndex +middle].Tag = null;
+			//AIPoints++;
+			flowLayoutPanel1.Controls[start.TabIndex + end].BackgroundImage = start.BackgroundImage;
+			flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
+			start.BackgroundImage = null;
+			start.Tag = null;
+			playerTurn = true;
+        }
+
 		public void AITurn() {
 			this.Refresh(); //must repaint manually, since this is called within a single click action
 			System.Threading.Thread.Sleep(1000);
@@ -188,65 +199,36 @@ namespace CheckersProject {
 				}
 			}
 
-			//is there a way to condense this? pass in arguments into a helper method? 
+			//try capture move
 			try {
 				foreach (Button button in AIPieces) {
-					//if piece is in column 1 or 2, can only attempt right-sided capture.
+					//if piece is in column 1 or 2, attempt right-sided capture.
 					if ((button.TabIndex % 8 == 0 ||button.TabIndex % 8 == 1)
 					&& flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
 					&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
-						label1.Text = "good-capture-right (exception)";
-						flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage = null;
-						flowLayoutPanel1.Controls[button.TabIndex + 9].Tag = null;
-						//AIPoints++
-						flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage = button.BackgroundImage;
-						flowLayoutPanel1.Controls[button.TabIndex + 18].Tag = button.Tag;
-						button.BackgroundImage = null;
-						button.Tag = null;
-						playerTurn = true;
+						AICapture(button, 9, 18);
 						break;
 					}
-					//if piece is in column 7 or 8 can only attempt left-sided capture.
+					//if piece is in column 7 or 8, attempt left-sided capture.
 					else if ((button.TabIndex % 8 == 6 || button.TabIndex % 8 == 7)
 					&& flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
 					&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
 						label1.Text = "good-capture-left (exception)";
-						flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage = null;
-						flowLayoutPanel1.Controls[button.TabIndex + 7].Tag = null;
-						//AIPoints++
-						flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage = button.BackgroundImage;
-						flowLayoutPanel1.Controls[button.TabIndex + 14].Tag = button.Tag;
-						button.BackgroundImage = null;
-						button.Tag = null;
-						playerTurn = true;
+						AICapture(button, 7, 14);
 						break;
 					}
-					//check if piece can make a left capture
+					//attempt left-sided capture.
 					else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
 					&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
 						label1.Text = "good-capture-left (normal)";
-						flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage = null;
-						flowLayoutPanel1.Controls[button.TabIndex + 7].Tag = null;
-						//AIPoints++
-						flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage = button.BackgroundImage;
-						flowLayoutPanel1.Controls[button.TabIndex + 14].Tag = button.Tag;
-						button.BackgroundImage = null;
-						button.Tag = null;
-						playerTurn = true;
+						AICapture(button, 7, 14);
 						break;
 					}
-					//check if piece can make a right capture
+					//attempt right-sided capture.
 					else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
 					&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
 						label1.Text = "good-capture-right (normal)";
-						flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage = null;
-						flowLayoutPanel1.Controls[button.TabIndex + 9].Tag = null;
-						//AIPoints++
-						flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage = button.BackgroundImage;
-						flowLayoutPanel1.Controls[button.TabIndex + 18].Tag = button.Tag;
-						button.BackgroundImage = null;
-						button.Tag = null;
-						playerTurn = true;
+						AICapture(button, 9, 18);
 						break;
 					}
 				}
