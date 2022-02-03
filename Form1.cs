@@ -54,7 +54,7 @@ namespace CheckersProject {
 		Button selected;
 		Boolean playerTurn;
 		List<Button> AIPieces;
-		Button[] temp;
+		Button[] ButtonArray;
 
 
 		public Form1() {
@@ -63,10 +63,10 @@ namespace CheckersProject {
 			playerTurn = true;
 			AIPieces = new List<Button>();
 
-			temp = new Button[64];
-			flowLayoutPanel1.Controls.CopyTo(temp, 0);
+			ButtonArray = new Button[64];
+			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 		}
-		
+
 
 		private void button_Click(object sender, EventArgs e) {
 			if (playerTurn) {
@@ -176,42 +176,16 @@ namespace CheckersProject {
 				}
 			}
 		}
-	
-		//see if I can put this within the AITurn method, then can modify local variables and save even more space
-		public void AICapture(Button start, int middle, int end) {
-			flowLayoutPanel1.Controls[start.TabIndex +middle].BackgroundImage = null;
-			flowLayoutPanel1.Controls[start.TabIndex +middle].Tag = null;
-			//AIPoints++;
-			flowLayoutPanel1.Controls[start.TabIndex + end].BackgroundImage = start.BackgroundImage;
-			flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
-			start.BackgroundImage = null;
-			start.Tag = null;
-			this.Refresh();
-			System.Threading.Thread.Sleep(1000);
-		}
-		public void AIMove(Button start, int end) {
-			//AIPoints++;
-			flowLayoutPanel1.Controls[start.TabIndex + end].BackgroundImage = start.BackgroundImage;
-			flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
-			start.BackgroundImage = null;
-			start.Tag = null;
-			this.Refresh();
-			System.Threading.Thread.Sleep(2000);
-		}
 
 		public void AITurn() {
 			this.Refresh(); //must repaint manually, since this is called within a single click action
-			System.Threading.Thread.Sleep(2000);
+			System.Threading.Thread.Sleep(1000);
 			Boolean moved = false;
 			Boolean moveAvailable = true;
+			Button temp = null;
+			int multi = 0;
 
-			//update
-			flowLayoutPanel1.Controls.CopyTo(temp, 0);
-			foreach (Button button in temp) {
-				if (button.Tag == "RCoin") {
-					AIPieces.Add(button);
-				}
-			}
+			updateAIData();
 
 			//try capture move
 			while (moveAvailable) {
@@ -222,8 +196,6 @@ namespace CheckersProject {
 							&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
 								label1.Text = "good-capture-right (exception)";
 								AICapture(button, 9, 18);
-								moved = true;
-								moveAvailable = true;
 								break;
 							}
 						}
@@ -233,8 +205,6 @@ namespace CheckersProject {
 							&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
 								label1.Text = "good-capture-left (exception)";
 								AICapture(button, 7, 14);
-								moved = true;
-								moveAvailable = true;
 								break;
 							}
 						}
@@ -243,8 +213,6 @@ namespace CheckersProject {
 						&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
 							label1.Text = "good-capture-left (normal)";
 							AICapture(button, 7, 14);
-							moved = true;
-							moveAvailable = true;
 							break;
 						}
 						//attempt right-sided capture.
@@ -252,8 +220,6 @@ namespace CheckersProject {
 						&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
 							label1.Text = "good-capture-right (normal)";
 							AICapture(button, 9, 18);
-							moved = true;
-							moveAvailable = true;
 							break;
 						}
 						else {
@@ -261,13 +227,16 @@ namespace CheckersProject {
 						}
 					}
                     if (moveAvailable) {
-						//update info for next move
-						flowLayoutPanel1.Controls.CopyTo(temp, 0);
-						foreach (Button button in temp) {
-							if (button.Tag == "RCoin") {
-								AIPieces.Add(button);
-							}
-						}
+						updateAIData();
+						foreach(Button button in AIPieces) {
+							if(button.TabIndex == multi) {
+								temp = button;
+                            }
+                        }
+						for(int i = 0; i<AIPieces.Count; i++) {
+							AIPieces.RemoveAt(i);
+                        }
+						AIPieces.Add(temp);
 					}
 				}
 				catch (ArgumentOutOfRangeException e) {
@@ -275,7 +244,8 @@ namespace CheckersProject {
 					//say there is 2 pieces. one is out of range, and triggers this. the other is in range but can't play
 					//because the first breaks the loop? 
 					//how do you get out? how does moveAvailable ever become false?
-					//moved = false; //issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					//moved = false; 
+					//issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 					label1.Text = "Index out of range!";
 				}
 			}
@@ -283,7 +253,7 @@ namespace CheckersProject {
 				//this bit of code mixes up the AIPieces to make movements not predictable
 				Random random = new Random();
 				int randIndex = 0;
-				Button temp = null;
+				temp = null;
 				for (int i = 0; i < 25; i++) {
 					randIndex = random.Next(0, AIPieces.Count);
 					temp = AIPieces[randIndex];
@@ -328,9 +298,57 @@ namespace CheckersProject {
 					label1.Text = "Normal Move Error";
 				}
 			}
+
+			updateAIData();
+
+			//make kings
+			foreach (Button button in AIPieces) {
+				if(button.TabIndex > 55) {
+					button.BackgroundImage = Properties.Resources.RKing;
+					button.Tag = "RKing";
+                }
+            }
+
 			AIPieces.Clear();
-			//label1.Text = "done sleeping!";
+			//label1.Text = "your turn?";
 			playerTurn = true;
-        }
+
+			//can I just leave these here?
+			void AICapture(Button start, int middle, int end) {
+				multi = start.TabIndex + end;
+				flowLayoutPanel1.Controls[start.TabIndex + middle].BackgroundImage = null;
+				flowLayoutPanel1.Controls[start.TabIndex + middle].Tag = null;
+				//AIPoints++;
+				flowLayoutPanel1.Controls[start.TabIndex + end].BackgroundImage = start.BackgroundImage;
+				flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
+				start.BackgroundImage = null;
+				start.Tag = null;
+				this.Refresh();
+				moved = true;
+				moveAvailable = true;
+				System.Threading.Thread.Sleep(1000);
+			}
+
+			void AIMove(Button start, int end) {
+				//AIPoints++;
+				flowLayoutPanel1.Controls[start.TabIndex + end].BackgroundImage = start.BackgroundImage;
+				flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
+				start.BackgroundImage = null;
+				start.Tag = null;
+				this.Refresh();
+				System.Threading.Thread.Sleep(1000);
+			}
+
+			void updateAIData() {
+				flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
+				foreach (Button button in ButtonArray) {
+					if (button.Tag == "RCoin") {
+						AIPieces.Add(button);
+					}
+				}
+			}
+
+		}
 	}
 }
+//Normal-moves are broken for AI, when piece gets to end since there is no king-movement it goes out of range
