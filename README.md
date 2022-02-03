@@ -18,12 +18,12 @@
           <ul>player points</ul>
       </ul>
       <ul>AI Controls
-        <ul>pawn movement</ul>
+        <ul><s>pawn movement</s></ul>
         <ul><s>pawn capture</s></ul>
         <ul>king movement</ul>
         <ul>king capture</ul>
         <ul><s>AI turn</s></ul>
-        <ul>AI multi-turn moves</ul>
+        <ul><s>AI multi-turn moves</s></ul>
         <ul>AI points</ul>
       </ul>
       <ul>Main Game Loop
