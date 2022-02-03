@@ -177,6 +177,7 @@ namespace CheckersProject {
 			}
 		}
 	
+		//see if I can put this within the AITurn method, then can modify local variables and save even more space
 		public void AICapture(Button start, int middle, int end) {
 			flowLayoutPanel1.Controls[start.TabIndex +middle].BackgroundImage = null;
 			flowLayoutPanel1.Controls[start.TabIndex +middle].Tag = null;
@@ -185,13 +186,26 @@ namespace CheckersProject {
 			flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
 			start.BackgroundImage = null;
 			start.Tag = null;
-			playerTurn = true;
-        }
+			this.Refresh();
+			System.Threading.Thread.Sleep(1000);
+		}
+		public void AIMove(Button start, int end) {
+			//AIPoints++;
+			flowLayoutPanel1.Controls[start.TabIndex + end].BackgroundImage = start.BackgroundImage;
+			flowLayoutPanel1.Controls[start.TabIndex + end].Tag = start.Tag;
+			start.BackgroundImage = null;
+			start.Tag = null;
+			this.Refresh();
+			System.Threading.Thread.Sleep(2000);
+		}
 
 		public void AITurn() {
 			this.Refresh(); //must repaint manually, since this is called within a single click action
-			System.Threading.Thread.Sleep(1000);
+			System.Threading.Thread.Sleep(2000);
+			Boolean moved = false;
+			Boolean moveAvailable = true;
 
+			//update
 			flowLayoutPanel1.Controls.CopyTo(temp, 0);
 			foreach (Button button in temp) {
 				if (button.Tag == "RCoin") {
@@ -200,45 +214,120 @@ namespace CheckersProject {
 			}
 
 			//try capture move
-			try {
-				foreach (Button button in AIPieces) {
-					//if piece is in column 1 or 2, attempt right-sided capture.
-					if ((button.TabIndex % 8 == 0 ||button.TabIndex % 8 == 1)
-					&& flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
-					&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
-						AICapture(button, 9, 18);
-						break;
+			while (moveAvailable) {
+				try {
+					foreach (Button button in AIPieces) {
+						if (button.TabIndex % 8 == 0 || button.TabIndex % 8 == 1){
+							if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
+							&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
+								label1.Text = "good-capture-right (exception)";
+								AICapture(button, 9, 18);
+								moved = true;
+								moveAvailable = true;
+								break;
+							}
+						}
+						//if piece is in column 7 or 8, attempt left-sided capture.
+						else if (button.TabIndex % 8 == 6 || button.TabIndex % 8 == 7){
+							if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
+							&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
+								label1.Text = "good-capture-left (exception)";
+								AICapture(button, 7, 14);
+								moved = true;
+								moveAvailable = true;
+								break;
+							}
+						}
+						//attempt left-sided capture.
+						else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
+						&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
+							label1.Text = "good-capture-left (normal)";
+							AICapture(button, 7, 14);
+							moved = true;
+							moveAvailable = true;
+							break;
+						}
+						//attempt right-sided capture.
+						else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
+						&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
+							label1.Text = "good-capture-right (normal)";
+							AICapture(button, 9, 18);
+							moved = true;
+							moveAvailable = true;
+							break;
+						}
+						else {
+							moveAvailable = false;
+						}
 					}
-					//if piece is in column 7 or 8, attempt left-sided capture.
-					else if ((button.TabIndex % 8 == 6 || button.TabIndex % 8 == 7)
-					&& flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
-					&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
-						label1.Text = "good-capture-left (exception)";
-						AICapture(button, 7, 14);
-						break;
-					}
-					//attempt left-sided capture.
-					else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
-					&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
-						label1.Text = "good-capture-left (normal)";
-						AICapture(button, 7, 14);
-						break;
-					}
-					//attempt right-sided capture.
-					else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
-					&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
-						label1.Text = "good-capture-right (normal)";
-						AICapture(button, 9, 18);
-						break;
+                    if (moveAvailable) {
+						//update info for next move
+						flowLayoutPanel1.Controls.CopyTo(temp, 0);
+						foreach (Button button in temp) {
+							if (button.Tag == "RCoin") {
+								AIPieces.Add(button);
+							}
+						}
 					}
 				}
+				catch (ArgumentOutOfRangeException e) {
+					//this might cause an infinite loop...
+					//say there is 2 pieces. one is out of range, and triggers this. the other is in range but can't play
+					//because the first breaks the loop? 
+					//how do you get out? how does moveAvailable ever become false?
+					//moved = false; //issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					label1.Text = "Index out of range!";
+				}
 			}
-            catch(ArgumentOutOfRangeException e) {
-				//temporary error handler for testing purposes. flag var here to end AICapture and start normal AIMove
-				//when I get there
-				label1.Text = "Index out of range!";
-            }
+			if (!moved) {
+				//this bit of code mixes up the AIPieces to make movements not predictable
+				Random random = new Random();
+				int randIndex = 0;
+				Button temp = null;
+				for (int i = 0; i < 25; i++) {
+					randIndex = random.Next(0, AIPieces.Count);
+					temp = AIPieces[randIndex];
+					AIPieces.RemoveAt(randIndex);
+					AIPieces.Add(temp);
+				}
 
+				try {
+					foreach (Button button in AIPieces) {
+						//if piece is in column 1, attempt right move.
+						if (button.TabIndex % 8 == 0){
+							if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
+								label1.Text = "good-move-right (exception)";
+								AIMove(button, 9);
+								break;
+							}
+						}
+						//if piece is in column 8, attempt left move.
+						else if (button.TabIndex % 8 == 7) {
+							if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
+								label1.Text = "good-move-left (exception)";
+								AIMove(button, 7);
+								break;
+							}
+						}
+						//attempt left move.
+						else if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
+							label1.Text = "good-move-left (normal)";
+							AIMove(button, 7);
+							break;
+						}
+						//attempt right move.
+						else if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
+							label1.Text = "good-move-right (normal)";
+							AIMove(button, 9);
+							break;
+						}
+					}
+				}
+				catch (ArgumentOutOfRangeException e) {
+					//this should never happen?
+					label1.Text = "Normal Move Error";
+				}
+			}
 			AIPieces.Clear();
 			//label1.Text = "done sleeping!";
 			playerTurn = true;
