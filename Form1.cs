@@ -97,7 +97,7 @@ Right-Cap	 index -7, index -14
 */
 
 namespace CheckersProject {
-    public partial class Form1 : Form {
+	public partial class Form1 : Form {
 		//Global Variables! I'm sorry!!
 		Button selected;
 		Boolean playerTurn;
@@ -237,19 +237,22 @@ namespace CheckersProject {
 			int multi = 0;
 
 			updateAIData();
-			
+
 			//try capture move
+			//fixed capture move to allow kings to be captured as well
+			//
 			while (moveAvailable) {
 				try {
 					foreach (Button button in AIPieces) {
 						//if piece is in column 1 or 2, attempt right-sided capture
-						if (button.TabIndex % 8 == 0 || button.TabIndex % 8 == 1){
+						if (button.TabIndex % 8 == 0 || button.TabIndex % 8 == 1) {
 							//King in bottom left quadrent
 							if (button.Tag == "RKing" && (button.TabIndex == 48 || button.TabIndex == 49 ||
 								button.TabIndex == 56 || button.TabIndex == 9)) {
 								//try an upward-right capture
 								if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
-							&& flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin") {
+								&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
 									label1.Text = "King capture up-right (lCol-bot)";
 									AICapture(button, -7, -14);
 									break;
@@ -258,17 +261,19 @@ namespace CheckersProject {
 							//King in middle left quadrent
 							else if (button.Tag == "RKing" && (button.TabIndex == 16 || button.TabIndex == 24 ||
 								button.TabIndex == 32 || button.TabIndex == 40 || button.TabIndex == 17 ||
-								button.TabIndex == 25)|| button.TabIndex == 33 || button.TabIndex == 41){
+								button.TabIndex == 25) || button.TabIndex == 33 || button.TabIndex == 41) {
 								//try an upward-right capture
 								if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
-									&& flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin") {
+								&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
 									label1.Text = "King capture up-right (lCol-mid)";
 									AICapture(button, -7, -14);
 									break;
 								}
 								//try a downward-right capture
 								else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
-									&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
+								&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
 									label1.Text = "King capture down-right (lCol-mid)";
 									AICapture(button, 9, 18);
 									break;
@@ -276,20 +281,22 @@ namespace CheckersProject {
 							}
 							//down right (also counts for King's in the top left quadrent)
 							else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
-								&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
+							&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
+							|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
 								label1.Text = "good-capture-right (exception)";
 								AICapture(button, 9, 18);
 								break;
 							}
 						}
 						//if piece is in column 7 or 8, attempt left-sided capture.
-						else if (button.TabIndex % 8 == 6 || button.TabIndex % 8 == 7){
+						else if (button.TabIndex % 8 == 6 || button.TabIndex % 8 == 7) {
 							//King in bottom right quadrent
 							if (button.Tag == "RKing" && (button.TabIndex == 54 || button.TabIndex == 55 ||
-								button.TabIndex == 62 || button.TabIndex == 63)) {
+							button.TabIndex == 62 || button.TabIndex == 63)) {
 								//try an upward-left capture
 								if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
-							&& flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin") {
+								&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
 									label1.Text = "King capture up-left (rCol-bot)";
 									AICapture(button, -9, -18);
 									break;
@@ -297,18 +304,20 @@ namespace CheckersProject {
 							}
 							//King in middle right quadrent ~~~~~~~~~~~~~~~~~~~~~~~
 							else if (button.Tag == "RKing" && (button.TabIndex == 22 || button.TabIndex == 30 ||
-								button.TabIndex == 38 || button.TabIndex == 46 || button.TabIndex == 23 ||
-								button.TabIndex == 31) || button.TabIndex == 39 || button.TabIndex == 47) {
+							button.TabIndex == 38 || button.TabIndex == 46 || button.TabIndex == 23 ||
+							button.TabIndex == 31) || button.TabIndex == 39 || button.TabIndex == 47) {
 								//try an upward-left capture
 								if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
-									&& flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin") {
+								&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
 									label1.Text = "King capture up-left (rCol-mid)";
 									AICapture(button, -9, -18);
 									break;
 								}
 								//try a downward-left capture
 								else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
-									&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
+								&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
 									label1.Text = "King capture down-left (rCol-mid)";
 									AICapture(button, 7, 14);
 									break;
@@ -316,7 +325,8 @@ namespace CheckersProject {
 							}
 							//down left (also counts for King's in the top left quadrent)
 							else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
-							&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
+							&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
+							|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
 								label1.Text = "good-capture-left (exception)";
 								AICapture(button, 7, 14);
 								break;
@@ -324,51 +334,50 @@ namespace CheckersProject {
 						}
 						//attempt left-sided capture.
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
-						&& flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin") {
+						&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
+						|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
 							label1.Text = "good-capture-left (normal)";
 							AICapture(button, 7, 14);
 							break;
 						}
 						//attempt right-sided capture.
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
-						&& flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin") {
+						&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
+						|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
 							label1.Text = "good-capture-right (normal)";
 							AICapture(button, 9, 18);
 							break;
 						}
-						//final check for kings to go up? all other possible moves have been tried I think
-						//so if it gets here the only other option is middle column kings making upward captures..
-						else if(button.Tag == "RKing") {
-							//label2.Text = "Did I get here?";
-							//try an up left capture
-							if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
-								&& flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin") {
-								label1.Text = "King capture up-left (center?)";
-								AICapture(button, -9, -18);
-								break;
-							}
-							//try an upward-right capture
-							if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
-								&& flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin") {
-								label1.Text = "King capture up-right (center?)";
-								AICapture(button, -7, -14);
-								break;
-							}
+						//try an up left capture (king)
+						else if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null && button.Tag == "RKing"
+						&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+						|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
+							label1.Text = "King capture up-left (center?)";
+							AICapture(button, -9, -18);
+							break;
+						}
+						//try an upward-right capture (king)
+						else if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null && button.Tag == "RKing"
+						&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+						|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
+						label1.Text = "King capture up-right (center?)";
+							AICapture(button, -7, -14);
+							break;
 						}
 						else {
 							moveAvailable = false;
 						}
 					}
-                    if (moveAvailable) {
+					if (moveAvailable) {
 						updateAIData();
-						foreach(Button button in AIPieces) {
-							if(button.TabIndex == multi) {
+						foreach (Button button in AIPieces) {
+							if (button.TabIndex == multi) {
 								temp = button;
-                            }
-                        }
-						for(int i = 0; i<AIPieces.Count; i++) {
+							}
+						}
+						for (int i = 0; i < AIPieces.Count; i++) {
 							AIPieces.RemoveAt(i);
-                        }
+						}
 						AIPieces.Add(temp);
 					}
 				}
@@ -378,7 +387,7 @@ namespace CheckersProject {
 					//because the first breaks the loop? 
 					//how do you get out? how does moveAvailable ever become false?
 					//moved = false; 
-					//issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					//issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ?
 					label1.Text = "Index out of range!";
 				}
 			}
@@ -397,7 +406,7 @@ namespace CheckersProject {
 				try {
 					foreach (Button button in AIPieces) {
 						//if piece is in column 1, attempt right move.
-						if (button.TabIndex % 8 == 0){
+						if (button.TabIndex % 8 == 0) {
 							if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
 								label1.Text = "good-move-right (exception)";
 								AIMove(button, 9);
@@ -434,21 +443,13 @@ namespace CheckersProject {
 
 			updateAIData();
 
-            //testing
-            foreach(Button button in AIPieces) {
-				if(button.Tag == "RKing") {
-					label2.Text = "REEEEEEEEEEEEEEEEEEEEE";
-                }
-            }
-
-
 			//make kings
 			foreach (Button button in AIPieces) {
-				if(button.TabIndex > 55) {
+				if (button.TabIndex > 55) {
 					button.BackgroundImage = Properties.Resources.RKing;
 					button.Tag = "RKing";
-                }
-            }
+				}
+			}
 
 			AIPieces.Clear();
 			//label1.Text = "your turn?";
@@ -492,4 +493,3 @@ namespace CheckersProject {
 		}
 	}
 }
-//Normal-moves are broken for AI, when piece gets to end since there is no king-movement it goes out of range
