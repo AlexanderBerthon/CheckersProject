@@ -242,6 +242,7 @@ namespace CheckersProject {
 			//fixed capture move to allow kings to be captured as well
 			//
 			while (moveAvailable) {
+				moveAvailable = false;
 				try {
 					foreach (Button button in AIPieces) {
 						//if piece is in column 1 or 2, attempt right-sided capture
@@ -332,10 +333,54 @@ namespace CheckersProject {
 								break;
 							}
 						}
+						//King is Bot-Left
+						else if (button.Tag == "RKing" && (button.TabIndex == 48 || button.TabIndex == 49 ||
+						button.TabIndex == 56 || button.TabIndex == 57)) {
+							//try up-right capture
+							if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
+							&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+							|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
+								label1.Text = "King capture up-right (BL)";
+								AICapture(button, -7, -14);
+								break;
+							}
+						}
+						//King is Bot-Right
+						else if (button.Tag == "RKing" && (button.TabIndex == 48 || button.TabIndex == 49 ||
+						button.TabIndex == 56 || button.TabIndex == 57)) {
+							//try up-left capture
+							if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
+							&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+							|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
+								label1.Text = "King capture up-left (center?)";
+								AICapture(button, -9, -18);
+								break;
+							}
+						}
+						//King Bot
+						else if (button.Tag == "RKing" && button.TabIndex >= 48) {
+							//try up-right capture
+							if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
+							&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+							|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
+								label1.Text = "King capture up-right (BL)";
+								AICapture(button, -7, -14);
+								break;
+							}
+							//try up-left capture
+							else if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
+							&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+							|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
+								label1.Text = "King capture up-left (center?)";
+								AICapture(button, -9, -18);
+								break;
+							}
+						}
 						//attempt left-sided capture.
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
 						&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
+							label2.Text = "ONE";
 							label1.Text = "good-capture-left (normal)";
 							AICapture(button, 7, 14);
 							break;
@@ -344,6 +389,7 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
 						&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
+							label2.Text = "TWO";
 							label1.Text = "good-capture-right (normal)";
 							AICapture(button, 9, 18);
 							break;
@@ -352,6 +398,7 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null && button.Tag == "RKing"
 						&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
+							label2.Text = "THREE";
 							label1.Text = "King capture up-left (center?)";
 							AICapture(button, -9, -18);
 							break;
@@ -360,7 +407,8 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null && button.Tag == "RKing"
 						&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
-						label1.Text = "King capture up-right (center?)";
+							label2.Text = "FOUR";
+							label1.Text = "King capture up-right (center?)";
 							AICapture(button, -7, -14);
 							break;
 						}
