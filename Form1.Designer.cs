@@ -624,6 +624,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(40, 40);
             this.button31.TabIndex = 30;
+            this.button31.Tag = "";
             this.button31.UseVisualStyleBackColor = false;
             this.button31.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1161,13 +1162,9 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
@@ -1220,6 +1217,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button15;
     }
 }
 
