@@ -20,8 +20,8 @@
       <ul>AI Controls
         <ul><s>pawn movement</s></ul>
         <ul><s>pawn capture</s></ul>
-        <ul>king movement</ul>
-        <ul>king capture</ul>
+        <ul><s>king movement</s></ul>
+        <ul><s>king capture</s></ul>
         <ul><s>AI turn</s></ul>
         <ul><s>AI multi-turn moves</s></ul>
         <ul>AI points</ul>
