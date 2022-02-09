@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
-/// pawns doing king moves
-/// kings at the bottom not doing anything
+/// might be a ghost king issue, tag is set but image is not? Might be related to making kings function. no proof yet just
+/// a hunch 
+/// 
+/// different pieces doing multi-moves. needs to be restricted to only the piece that made the capture can go again.
 /// </summary>
 
 
@@ -226,9 +228,6 @@ namespace CheckersProject {
 		}
 
 		public void AITurn() {
-			//testing
-			//label2.Text = "?";
-
 			this.Refresh(); //must repaint manually, since this is called within a single click action
 			System.Threading.Thread.Sleep(1000);
 			Boolean moved = false;
@@ -238,9 +237,10 @@ namespace CheckersProject {
 
 			updateAIData();
 
+			//side note, might need to do a "make kings" method call after each move for a multiplay 
+			//to enable a "capture move into the last slot, make king, then reverse direction into another capture" scenario possible
+
 			//try capture move
-			//fixed capture move to allow kings to be captured as well
-			//
 			while (moveAvailable) {
 				moveAvailable = false;
 				try {
@@ -380,7 +380,6 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
 						&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
-							label2.Text = "ONE";
 							label1.Text = "good-capture-left (normal)";
 							AICapture(button, 7, 14);
 							break;
@@ -389,7 +388,6 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
 						&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
-							label2.Text = "TWO";
 							label1.Text = "good-capture-right (normal)";
 							AICapture(button, 9, 18);
 							break;
@@ -398,7 +396,6 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null && button.Tag == "RKing"
 						&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
-							label2.Text = "THREE";
 							label1.Text = "King capture up-left (center?)";
 							AICapture(button, -9, -18);
 							break;
@@ -407,7 +404,6 @@ namespace CheckersProject {
 						else if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null && button.Tag == "RKing"
 						&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
 						|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
-							label2.Text = "FOUR";
 							label1.Text = "King capture up-right (center?)";
 							AICapture(button, -7, -14);
 							break;
@@ -439,8 +435,9 @@ namespace CheckersProject {
 					label1.Text = "Index out of range!";
 				}
 			}
+			//try normal move
 			if (!moved) {
-				//this bit of code mixes up the AIPieces to make movements not predictable
+				//this bit of code mixes up the AIPieces to make movements unpredictable
 				Random random = new Random();
 				int randIndex = 0;
 				temp = null;
@@ -453,32 +450,88 @@ namespace CheckersProject {
 
 				try {
 					foreach (Button button in AIPieces) {
-						//if piece is in column 1, attempt right move.
-						if (button.TabIndex % 8 == 0) {
+						//if in bottom row (guarenteed king) maybe
+						if(button.TabIndex >= 56) {
+							//if in bot-left corner, try up-right move
+							if(button.TabIndex == 56 && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
+								label1.Text = "up right move";
+								AIMove(button, -7);
+								break;
+							}
+							//if in bot-right corner, try up left move
+							else if(button.TabIndex == 63 && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
+								label1.Text = "up left move";
+								AIMove(button, -9);
+								break;
+							}
+                            else {
+								//try up-right move
+								if (button.TabIndex == 56 && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
+									label1.Text = "up right move";
+									AIMove(button, -7);
+									break;
+								}
+								//try up-left move
+								else if (button.TabIndex == 63 && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
+									label1.Text = "up left move";
+									AIMove(button, -9);
+									break;
+								}
+
+							}
+                        }
+						//if piece is in column 1
+						else if (button.TabIndex % 8 == 0) {
+							//attempt down-right move
 							if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
 								label1.Text = "good-move-right (exception)";
 								AIMove(button, 9);
 								break;
 							}
+							//if king attempt up-right move 
+							if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
+								label1.Text = "good-move-right (exception)";
+								AIMove(button, -7);
+								break;
+							}
 						}
-						//if piece is in column 8, attempt left move.
+						//if piece is in column 8
 						else if (button.TabIndex % 8 == 7) {
+							//attempt down-left move
 							if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
 								label1.Text = "good-move-left (exception)";
 								AIMove(button, 7);
 								break;
 							}
+							//if king attempt up-left move
+							if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
+								label1.Text = "good-move-right (exception)";
+								AIMove(button, -9);
+								break;
+							}
 						}
-						//attempt left move.
+						//attempt down-left move.
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
 							label1.Text = "good-move-left (normal)";
 							AIMove(button, 7);
 							break;
 						}
-						//attempt right move.
+						//attempt down-right move.
 						else if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
 							label1.Text = "good-move-right (normal)";
 							AIMove(button, 9);
+							break;
+						}
+						//if king attempt up-left move
+						else if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
+							label1.Text = "good-move-right (exception)";
+							AIMove(button, -9);
+							break;
+						}
+						//if king attempt up-right move 
+						else if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
+							label1.Text = "good-move-right (exception) :)";
+							AIMove(button, -7);
 							break;
 						}
 					}
@@ -493,7 +546,7 @@ namespace CheckersProject {
 
 			//make kings
 			foreach (Button button in AIPieces) {
-				if (button.TabIndex > 55) {
+				if (button.Tag == "RCoin" && button.TabIndex > 55) {
 					button.BackgroundImage = Properties.Resources.RKing;
 					button.Tag = "RKing";
 				}
