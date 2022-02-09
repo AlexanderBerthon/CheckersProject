@@ -13,7 +13,30 @@ using System.Windows.Forms;
 /// a hunch 
 /// 
 /// different pieces doing multi-moves. needs to be restricted to only the piece that made the capture can go again.
+/// 
+/// moved and captured in the same turn
+/// 
+/// AI not prioritizing captures like it used to? Loop might be broken?
 /// </summary>
+///
+/// initial troubleshooting ideas
+/// 1) AI pieces starts at 0, it seems like if that first one throws an out of range exception, the whole capture
+///		loop is skipped. so re-visit the logic for AICapture
+///	2) AI capture loop isn't properly isolating the piece that "made" the capture. and will keep looping through all
+///		pieces that can possibly capture, ie 3 different pieces make 3 different capture moves in the same AITurn
+///a
+///a
+///a
+///a
+///a
+/// ISSUE FOUND: the if statement check goes out of range, exception breaks the entire loop, only the first piece is checked
+/// goes out of range, gives up and tries normal moves even though the other pieces could capture
+/// need to fix either the if statement check
+/// or
+/// find a way around the exceptions/remove the need for the try catch
+
+//what if I made more global variables? if button.index is within border[] //don't do capture moves
+//else normal code, no chance of out of range errors? ehh you would have to make like 8+ globals for that.. 
 
 
 /*
@@ -241,17 +264,19 @@ namespace CheckersProject {
 			//to enable a "capture move into the last slot, make king, then reverse direction into another capture" scenario possible
 
 			//try capture move
+
 			while (moveAvailable) {
 				moveAvailable = false;
 				try {
 					foreach (Button button in AIPieces) {
 						//if piece is in column 1 or 2, attempt right-sided capture
 						if (button.TabIndex % 8 == 0 || button.TabIndex % 8 == 1) {
-							//King in bottom left quadrent
-							if (button.Tag == "RKing" && (button.TabIndex == 48 || button.TabIndex == 49 ||
-								button.TabIndex == 56 || button.TabIndex == 9)) {
-								//try an upward-right capture
-								if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
+							//bottom left quadrent
+							if (button.TabIndex == 48 || button.TabIndex == 49 ||
+								button.TabIndex == 56 || button.TabIndex == 9) {
+								//try an upward-right capture if king and available
+								if (button.Tag == "RKing" 
+								&& flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
 								&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
 								|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
 									label1.Text = "King capture up-right (lCol-bot)";
@@ -291,11 +316,12 @@ namespace CheckersProject {
 						}
 						//if piece is in column 7 or 8, attempt left-sided capture.
 						else if (button.TabIndex % 8 == 6 || button.TabIndex % 8 == 7) {
-							//King in bottom right quadrent
-							if (button.Tag == "RKing" && (button.TabIndex == 54 || button.TabIndex == 55 ||
-							button.TabIndex == 62 || button.TabIndex == 63)) {
-								//try an upward-left capture
-								if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
+							//bottom right quadrent
+							if (button.TabIndex == 54 || button.TabIndex == 55 ||
+							button.TabIndex == 62 || button.TabIndex == 63) {
+								//try an upward-left capture if king and available
+								if (button.Tag == "RKing"
+								&& flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
 								&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
 								|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
 									label1.Text = "King capture up-left (rCol-bot)";
@@ -303,7 +329,7 @@ namespace CheckersProject {
 									break;
 								}
 							}
-							//King in middle right quadrent ~~~~~~~~~~~~~~~~~~~~~~~
+							//King in middle right quadrent
 							else if (button.Tag == "RKing" && (button.TabIndex == 22 || button.TabIndex == 30 ||
 							button.TabIndex == 38 || button.TabIndex == 46 || button.TabIndex == 23 ||
 							button.TabIndex == 31) || button.TabIndex == 39 || button.TabIndex == 47) {
@@ -333,85 +359,102 @@ namespace CheckersProject {
 								break;
 							}
 						}
-						//King is Bot-Left
-						else if (button.Tag == "RKing" && (button.TabIndex == 48 || button.TabIndex == 49 ||
-						button.TabIndex == 56 || button.TabIndex == 57)) {
-							//try up-right capture
-							if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
-							&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
-							|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
-								label1.Text = "King capture up-right (BL)";
-								AICapture(button, -7, -14);
-								break;
+                        //else mid section
+                        else {
+							//bottom 2 rows
+							if (button.TabIndex == 50 || button.TabIndex == 51 || button.TabIndex == 52 ||
+							button.TabIndex == 53 || button.TabIndex == 58 || button.TabIndex == 59 ||
+							button.TabIndex == 60 || button.TabIndex == 61) {
+								//if king and up move avail
+								if (button.Tag == "RKing") {
+									//try an upward-left capture
+									if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
+									&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+									|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
+										label1.Text = "King capture up-left (rCol-mid)";
+										AICapture(button, -9, -18);
+										break;
+									}
+									//try an upward-right capture
+									else if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
+									&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+									|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
+										label1.Text = "King capture up-right (lCol-mid)";
+										AICapture(button, -7, -14);
+										break;
+									}
+								}
+								else {
+									//do nothing (normal pieces cannot capture down or will go out of range)
+								}
 							}
-						}
-						//King is Bot-Right
-						else if (button.Tag == "RKing" && (button.TabIndex == 48 || button.TabIndex == 49 ||
-						button.TabIndex == 56 || button.TabIndex == 57)) {
-							//try up-left capture
-							if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
-							&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
-							|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
-								label1.Text = "King capture up-left (center?)";
-								AICapture(button, -9, -18);
-								break;
+							//if in top 2 rows
+							else if (button.TabIndex == 2 || button.TabIndex == 3 || button.TabIndex == 4 ||
+							button.TabIndex == 5 || button.TabIndex == 10 || button.TabIndex == 11 ||
+							button.TabIndex == 12 || button.TabIndex == 13) {
+								//try down left
+								if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
+								&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
+									label1.Text = "good-capture-left (exception)";
+									AICapture(button, 7, 14);
+									break;
+								}
+								//try down right
+								else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
+								&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
+								|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
+									label1.Text = "good-capture-right (exception)";
+									AICapture(button, 9, 18);
+									break;
+								}
 							}
-						}
-						//King Bot
-						else if (button.Tag == "RKing" && button.TabIndex >= 48) {
-							//try up-right capture
-							if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
-							&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
-							|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
-								label1.Text = "King capture up-right (BL)";
-								AICapture(button, -7, -14);
-								break;
+							//mid no restrictions, try every move
+                            else {
+								if (button.Tag == "RKing") {
+									//try an upward-left capture
+									if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
+									&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
+									|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
+										label1.Text = "King capture up-left (rCol-mid)";
+										AICapture(button, -9, -18);
+										break;
+									}
+									//try an upward-right capture
+									else if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null
+									&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
+									|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
+										label1.Text = "King capture up-right (lCol-mid)";
+										AICapture(button, -7, -14);
+										break;
+									}
+								}
+                                else {
+									//try down left
+									if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
+									&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
+									|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
+										label1.Text = "good-capture-left (exception)";
+										AICapture(button, 7, 14);
+										break;
+									}
+									//try down right
+									else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
+									&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
+									|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
+										label1.Text = "good-capture-right (exception)";
+										AICapture(button, 9, 18);
+										break;
+									}
+								}
+
 							}
-							//try up-left capture
-							else if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null
-							&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
-							|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
-								label1.Text = "King capture up-left (center?)";
-								AICapture(button, -9, -18);
-								break;
+
 							}
-						}
-						//attempt left-sided capture.
-						else if (flowLayoutPanel1.Controls[button.TabIndex + 14].BackgroundImage == null
-						&& (flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BCoin"
-						|| flowLayoutPanel1.Controls[button.TabIndex + 7].Tag == "BKing")) {
-							label1.Text = "good-capture-left (normal)";
-							AICapture(button, 7, 14);
-							break;
-						}
-						//attempt right-sided capture.
-						else if (flowLayoutPanel1.Controls[button.TabIndex + 18].BackgroundImage == null
-						&& (flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BCoin"
-						|| flowLayoutPanel1.Controls[button.TabIndex + 9].Tag == "BKing")) {
-							label1.Text = "good-capture-right (normal)";
-							AICapture(button, 9, 18);
-							break;
-						}
-						//try an up left capture (king)
-						else if (flowLayoutPanel1.Controls[button.TabIndex - 18].BackgroundImage == null && button.Tag == "RKing"
-						&& (flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BCoin"
-						|| flowLayoutPanel1.Controls[button.TabIndex - 9].Tag == "BKing")) {
-							label1.Text = "King capture up-left (center?)";
-							AICapture(button, -9, -18);
-							break;
-						}
-						//try an upward-right capture (king)
-						else if (flowLayoutPanel1.Controls[button.TabIndex - 14].BackgroundImage == null && button.Tag == "RKing"
-						&& (flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BCoin"
-						|| flowLayoutPanel1.Controls[button.TabIndex - 7].Tag == "BKing")) {
-							label1.Text = "King capture up-right (center?)";
-							AICapture(button, -7, -14);
-							break;
-						}
-						else {
-							moveAvailable = false;
-						}
 					}
+					//update data and Isolate the piece that moved, the only piece the AI can "see" the second time around
+					//will be the one that move, ideally, meaning it is the only piece that can multi-move
+					//might be bugged though, needs testing
 					if (moveAvailable) {
 						updateAIData();
 						foreach (Button button in AIPieces) {
@@ -426,13 +469,8 @@ namespace CheckersProject {
 					}
 				}
 				catch (ArgumentOutOfRangeException e) {
-					//this might cause an infinite loop...
-					//say there is 2 pieces. one is out of range, and triggers this. the other is in range but can't play
-					//because the first breaks the loop? 
-					//how do you get out? how does moveAvailable ever become false?
-					//moved = false; 
-					//issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ?
-					label1.Text = "Index out of range!";
+					//this should NEVER happen with updated logic
+					Console.Error.WriteLine(e);
 				}
 			}
 			//try normal move
