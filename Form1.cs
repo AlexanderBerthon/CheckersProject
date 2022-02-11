@@ -12,7 +12,6 @@ using System.Windows.Forms;
 /// might be a ghost king issue, tag is set but image is not? Might be related to making kings function. no proof yet just
 /// a hunch 
 /// 
-/// player capture issue, can click offscreen to capture pieces that you shouldn't be able to
 /// 
 
 
@@ -160,6 +159,28 @@ namespace CheckersProject {
 							validMove = false;
 						}
 					}
+					//check move for 2nd left column exception
+					if (selected.TabIndex % 8 == 1) {
+						//normal move check
+						if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
+							validMove = true;
+						}
+						else if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
+							validMove = true;
+						}
+						//capture move check
+						else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
+							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin") {
+								flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
+								playerScore++;
+								validMove = true;
+							}
+						}
+						else {
+							validMove = false;
+						}
+					}
 					//check move for right column exception
 					else if (selected.TabIndex % 8 == 7) {
 						//normal move check
@@ -172,6 +193,28 @@ namespace CheckersProject {
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
 								playerScore++; 
+								validMove = true;
+							}
+						}
+						else {
+							validMove = false;
+						}
+					}
+					//check move for 2nd right column exception
+					else if (selected.TabIndex % 8 == 6) {
+						//normal move check
+						if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
+							validMove = true;
+						}
+						else if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
+							validMove = true;
+						}
+						//capture move check
+						else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
+							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin") {
+								flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
+								playerScore++;
 								validMove = true;
 							}
 						}
