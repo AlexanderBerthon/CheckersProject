@@ -127,7 +127,7 @@ namespace CheckersProject {
 				Button button = (Button)sender;
 				if (selected == null) {
 					if (button.BackgroundImage == null || button.Tag == "RCoin" || button.Tag == "RKing") {
-						label1.Text = "Invalid Selection";
+						label3.Text = "Invalid Selection";
 					}
 					else {
 						selected = button;
@@ -146,11 +146,26 @@ namespace CheckersProject {
 						if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
 							validMove = true;
 						}
+						//king normal down move
+						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
+							validMove = true;
+						}
 						//capture move check
 						else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
-							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin") {
+							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
+								playerScore++;
+								validMove = true;
+							}
+						}
+						//king capture down move
+						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
+							if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RKing") {
+								flowLayoutPanel1.Controls[selected.TabIndex + 9].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag = null;
 								playerScore++;
 								validMove = true;
 							}
@@ -160,7 +175,7 @@ namespace CheckersProject {
 						}
 					}
 					//check move for 2nd left column exception
-					if (selected.TabIndex % 8 == 1) {
+					else if (selected.TabIndex % 8 == 1) {
 						//normal move check
 						if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
 							validMove = true;
@@ -168,11 +183,30 @@ namespace CheckersProject {
 						else if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
 							validMove = true;
 						}
+						//king normal downleft move
+						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
+							validMove = true;
+						}
+						//king normal downright move
+						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
+							validMove = true;
+						}
 						//capture move check
 						else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
-							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin") {
+							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
+								|| flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
+								playerScore++;
+								validMove = true;
+							}
+						}
+						//king capture down move
+						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
+							if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RKing") {
+								flowLayoutPanel1.Controls[selected.TabIndex + 9].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag = null;
 								playerScore++;
 								validMove = true;
 							}
@@ -187,12 +221,27 @@ namespace CheckersProject {
 						if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
 							validMove = true;
 						}
+						//king normal downleft move
+						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
+							validMove = true;
+						}
 						//capture move check
 						else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
-							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin") {
+							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
 								playerScore++; 
+								validMove = true;
+							}
+						}
+						//king capture down left
+						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
+							if (flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RKing") {
+								flowLayoutPanel1.Controls[selected.TabIndex + 7].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag = null;
+								playerScore++;
 								validMove = true;
 							}
 						}
@@ -209,11 +258,30 @@ namespace CheckersProject {
 						else if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
 							validMove = true;
 						}
+						//king normal downleft move
+						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
+							validMove = true;
+						}
+						//king normal downright move
+						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
+							validMove = true;
+						}
 						//capture move check
 						else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
-							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin") {
+							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
+								playerScore++;
+								validMove = true;
+							}
+						}
+						//king capture down left
+						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
+							if (flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RCoin"
+							|| flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RKing") {
+								flowLayoutPanel1.Controls[selected.TabIndex + 7].BackgroundImage = null;
+								flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag = null;
 								playerScore++;
 								validMove = true;
 							}
@@ -231,9 +299,19 @@ namespace CheckersProject {
 							validMove = false;
 						}
 					}
+					//check normal move for kings
+					else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7) || selected.TabIndex == (button.TabIndex - 9))) {
+						if (button.BackgroundImage == null) {
+							validMove = true;
+						}
+						else {
+							validMove = false;
+						}
+					}
 					//check capture move up-left
 					else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {//
-						if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin") {
+						if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
+						|| flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RKing") {
 							flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 							flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
 							playerScore++; 
@@ -242,10 +320,32 @@ namespace CheckersProject {
 					}
 					//check capture move up-right
 					else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
-						if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin") {
+						if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
+						|| flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RKing") {
 							flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
 							flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
 							playerScore++; 
+							validMove = true;
+						}
+					}
+					//check king capture down-left
+					else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
+						if (flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RCoin"
+						|| flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RKing") {
+							flowLayoutPanel1.Controls[selected.TabIndex + 7].BackgroundImage = null;
+							flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag = null;
+							playerScore++;
+							validMove = true;
+						}
+					}
+					//check king capture down-right
+					//king capture down move
+					else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
+						if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
+						|| flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RKing") {
+							flowLayoutPanel1.Controls[selected.TabIndex + 9].BackgroundImage = null;
+							flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag = null;
+							playerScore++;
 							validMove = true;
 						}
 					}
@@ -265,7 +365,7 @@ namespace CheckersProject {
 						label1.Text = "AI Score: " + AIScore.ToString();
 					}
 					else {
-						label1.Text = "Invalid Move";
+						label3.Text = "Invalid Move";
 					}
 				}
 			}
@@ -568,7 +668,7 @@ namespace CheckersProject {
 				}
 				catch (ArgumentOutOfRangeException e) {
 					//this should never happen?
-					label1.Text = "Normal Move Error";
+					label3.Text = "Normal Move Error";
 				}
 			}
 

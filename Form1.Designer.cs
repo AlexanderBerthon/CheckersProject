@@ -91,6 +91,7 @@
             this.button64 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -754,13 +755,13 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(40, 40);
             this.button40.TabIndex = 39;
+            this.button40.Tag = "";
             this.button40.UseVisualStyleBackColor = false;
             this.button40.Click += new System.EventHandler(this.button_Click);
             // 
             // button41
             // 
             this.button41.BackColor = System.Drawing.Color.Black;
-            this.button41.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button41.BackgroundImage")));
             this.button41.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button41.FlatAppearance.BorderSize = 0;
             this.button41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -769,7 +770,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(40, 40);
             this.button41.TabIndex = 40;
-            this.button41.Tag = "BCoin";
+            this.button41.Tag = "";
             this.button41.UseVisualStyleBackColor = false;
             this.button41.Click += new System.EventHandler(this.button_Click);
             // 
@@ -790,7 +791,6 @@
             // button43
             // 
             this.button43.BackColor = System.Drawing.Color.Black;
-            this.button43.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button43.BackgroundImage")));
             this.button43.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button43.FlatAppearance.BorderSize = 0;
             this.button43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -799,7 +799,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(40, 40);
             this.button43.TabIndex = 42;
-            this.button43.Tag = "BCoin";
+            this.button43.Tag = "";
             this.button43.UseVisualStyleBackColor = false;
             this.button43.Click += new System.EventHandler(this.button_Click);
             // 
@@ -820,7 +820,7 @@
             // button45
             // 
             this.button45.BackColor = System.Drawing.Color.Black;
-            this.button45.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button45.BackgroundImage")));
+            this.button45.BackgroundImage = global::CheckersProject.Properties.Resources.BKing;
             this.button45.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button45.FlatAppearance.BorderSize = 0;
             this.button45.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -829,7 +829,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(40, 40);
             this.button45.TabIndex = 44;
-            this.button45.Tag = "BCoin";
+            this.button45.Tag = "BKing";
             this.button45.UseVisualStyleBackColor = false;
             this.button45.Click += new System.EventHandler(this.button_Click);
             // 
@@ -850,7 +850,6 @@
             // button47
             // 
             this.button47.BackColor = System.Drawing.Color.Black;
-            this.button47.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button47.BackgroundImage")));
             this.button47.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button47.FlatAppearance.BorderSize = 0;
             this.button47.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -859,7 +858,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(40, 40);
             this.button47.TabIndex = 46;
-            this.button47.Tag = "BCoin";
+            this.button47.Tag = "";
             this.button47.UseVisualStyleBackColor = false;
             this.button47.Click += new System.EventHandler(this.button_Click);
             // 
@@ -894,7 +893,6 @@
             // button50
             // 
             this.button50.BackColor = System.Drawing.Color.Black;
-            this.button50.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button50.BackgroundImage")));
             this.button50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button50.FlatAppearance.BorderSize = 0;
             this.button50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -903,7 +901,7 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(40, 40);
             this.button50.TabIndex = 49;
-            this.button50.Tag = "BCoin";
+            this.button50.Tag = "";
             this.button50.UseVisualStyleBackColor = false;
             this.button50.Click += new System.EventHandler(this.button_Click);
             // 
@@ -924,7 +922,7 @@
             // button52
             // 
             this.button52.BackColor = System.Drawing.Color.Black;
-            this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button52.BackgroundImage")));
+            this.button52.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button52.FlatAppearance.BorderSize = 0;
             this.button52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -933,7 +931,7 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(40, 40);
             this.button52.TabIndex = 51;
-            this.button52.Tag = "BCoin";
+            this.button52.Tag = "RCoin";
             this.button52.UseVisualStyleBackColor = false;
             this.button52.Click += new System.EventHandler(this.button_Click);
             // 
@@ -954,7 +952,7 @@
             // button54
             // 
             this.button54.BackColor = System.Drawing.Color.Black;
-            this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button54.BackgroundImage")));
+            this.button54.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button54.FlatAppearance.BorderSize = 0;
             this.button54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -963,7 +961,7 @@
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(40, 40);
             this.button54.TabIndex = 53;
-            this.button54.Tag = "BCoin";
+            this.button54.Tag = "RCoin";
             this.button54.UseVisualStyleBackColor = false;
             this.button54.Click += new System.EventHandler(this.button_Click);
             // 
@@ -984,7 +982,6 @@
             // button56
             // 
             this.button56.BackColor = System.Drawing.Color.Black;
-            this.button56.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button56.BackgroundImage")));
             this.button56.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button56.FlatAppearance.BorderSize = 0;
             this.button56.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -993,14 +990,13 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(40, 40);
             this.button56.TabIndex = 55;
-            this.button56.Tag = "BCoin";
+            this.button56.Tag = "";
             this.button56.UseVisualStyleBackColor = false;
             this.button56.Click += new System.EventHandler(this.button_Click);
             // 
             // button57
             // 
             this.button57.BackColor = System.Drawing.Color.Black;
-            this.button57.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button57.BackgroundImage")));
             this.button57.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button57.FlatAppearance.BorderSize = 0;
             this.button57.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1009,7 +1005,7 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(40, 40);
             this.button57.TabIndex = 56;
-            this.button57.Tag = "BCoin";
+            this.button57.Tag = "";
             this.button57.UseVisualStyleBackColor = false;
             this.button57.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1030,7 +1026,6 @@
             // button59
             // 
             this.button59.BackColor = System.Drawing.Color.Black;
-            this.button59.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button59.BackgroundImage")));
             this.button59.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button59.FlatAppearance.BorderSize = 0;
             this.button59.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1039,7 +1034,7 @@
             this.button59.Name = "button59";
             this.button59.Size = new System.Drawing.Size(40, 40);
             this.button59.TabIndex = 58;
-            this.button59.Tag = "BCoin";
+            this.button59.Tag = "";
             this.button59.UseVisualStyleBackColor = false;
             this.button59.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1060,7 +1055,6 @@
             // button61
             // 
             this.button61.BackColor = System.Drawing.Color.Black;
-            this.button61.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button61.BackgroundImage")));
             this.button61.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button61.FlatAppearance.BorderSize = 0;
             this.button61.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1069,7 +1063,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(40, 40);
             this.button61.TabIndex = 60;
-            this.button61.Tag = "BCoin";
+            this.button61.Tag = "";
             this.button61.UseVisualStyleBackColor = false;
             this.button61.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1090,7 +1084,6 @@
             // button63
             // 
             this.button63.BackColor = System.Drawing.Color.Black;
-            this.button63.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button63.BackgroundImage")));
             this.button63.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button63.FlatAppearance.BorderSize = 0;
             this.button63.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1099,7 +1092,7 @@
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(40, 40);
             this.button63.TabIndex = 62;
-            this.button63.Tag = "BCoin";
+            this.button63.Tag = "";
             this.button63.UseVisualStyleBackColor = false;
             this.button63.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1135,12 +1128,22 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "label2";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(155, 345);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "label3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(344, 361);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -1221,6 +1224,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Label label3;
     }
 }
 
