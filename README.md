@@ -11,13 +11,13 @@
         <ul>Player Controls
           <ul><s>pawn movement</s></ul>
           <ul><s>pawn capture</s></ul>
-          <ul>king movement</ul>
-          <ul>king capture</ul>
+          <ul><s>king movement</s></ul>
+          <ul><s>king capture</s></ul>
           <ul><s>player turn</s></ul>
           <ul>player multi-turn moves</ul>
           <ul><s>player points</s></ul>
       </ul>
-      <ul>AI Controls
+      <ul><s>AI Controls</s>
         <ul><s>pawn movement</s></ul>
         <ul><s>pawn capture</s></ul>
         <ul><s>king movement</s></ul>
