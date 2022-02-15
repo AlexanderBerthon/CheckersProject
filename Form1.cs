@@ -125,6 +125,8 @@ namespace CheckersProject {
 
 		/*
 		TODO
+		win condition
+		game over
 		highlight end turn button when the first successful move has completed, even if there is another move to play. consistency
 		*/
 
@@ -443,6 +445,16 @@ namespace CheckersProject {
 					else {
 						label3.Text = "Invalid Move";
 					}
+
+					//check win condition
+					if (playerScore == 12) {
+						foreach (Button btn in ButtonArray) {
+							btn.Enabled = false;
+						}
+						button65.Enabled = false;
+						label3.Text = "YOU WIN!";
+					}
+
 				}
 			}
 		}
@@ -759,6 +771,17 @@ namespace CheckersProject {
 			//label1.Text = "your turn?";
 			playerTurn = true;
 			moveStatus = "invalid";
+
+
+			//check win condition
+			if (AIScore == 12) {
+				foreach (Button btn in ButtonArray) {
+					btn.Enabled = false;
+				}
+				button65.Enabled = false;
+				label3.Text = "YOU LOSE!";
+			}
+
 
 			//can I just leave these here?
 			///This function modifies the game board data to display AI capture movement
