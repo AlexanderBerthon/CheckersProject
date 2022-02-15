@@ -8,13 +8,13 @@
       <ul><s>Create UI checkerboard design (icons, background images, etc.)</s></ul>
       <ul><s>Implement checkerboard front end (button grid / layout / etc.)</s></ul>
       <ul>Gameplay
-        <ul>Player Controls
+        <ul><s>Player Controls</s>
           <ul><s>pawn movement</s></ul>
           <ul><s>pawn capture</s></ul>
           <ul><s>king movement</s></ul>
           <ul><s>king capture</s></ul>
           <ul><s>player turn</s></ul>
-          <ul>player multi-turn moves</ul>
+          <ul><s>player multi-turn moves</s></ul>
           <ul><s>player points</s></ul>
       </ul>
       <ul><s>AI Controls</s>
