@@ -124,14 +124,22 @@ namespace CheckersProject {
 		}
 
 		/*
-
 		TODO
-		rename button_Click function to something more descriptive
 		highlight end turn button when the first successful move has completed, even if there is another move to play. consistency
 		*/
 
 		private void endTurn_Click(object sender, EventArgs e) {
 			if (playerTurn) {
+				//update
+				flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
+				//make kings
+				for (int i = 0; i< 8; i++) {
+					if(ButtonArray[i].Tag == "BCoin") {
+						ButtonArray[i].BackgroundImage = Properties.Resources.BKing;
+						ButtonArray[i].Tag = "BKing";
+
+					}
+				}
 				playerTurn = false;
 				selected.FlatStyle = FlatStyle.Flat;
 				selected = null;
@@ -139,8 +147,7 @@ namespace CheckersProject {
 			}
 		}
 
-		private void BoardButton_Click(object sender, EventArgs e) { }
-		private void button_Click(object sender, EventArgs e) {
+		private void Boardbutton_Click(object sender, EventArgs e) {
 			if (playerTurn) {
 				Button button = (Button)sender;
 				if (selected == null) {
@@ -740,7 +747,7 @@ namespace CheckersProject {
 
 			updateAIData();
 
-			//make kings
+			//make kings (ai)
 			foreach (Button button in AIPieces) {
 				if (button.Tag == "RCoin" && button.TabIndex > 55) {
 					button.BackgroundImage = Properties.Resources.RKing;
@@ -751,6 +758,7 @@ namespace CheckersProject {
 			AIPieces.Clear();
 			//label1.Text = "your turn?";
 			playerTurn = true;
+			moveStatus = "invalid";
 
 			//can I just leave these here?
 			///This function modifies the game board data to display AI capture movement
