@@ -101,7 +101,8 @@ namespace CheckersProject {
 	public partial class Form1 : Form {
 		//Global Variables! I'm sorry!!
 		Button selected;
-		Boolean playerTurn;
+		Boolean playerTurn;//prevents click actions during AI move
+		String moveStatus;
 		List<Button> AIPieces;
 		Button[] ButtonArray;
 
@@ -113,6 +114,7 @@ namespace CheckersProject {
 			InitializeComponent();
 			selected = null;
 			playerTurn = true;
+			moveStatus = "invalid";
 			AIPieces = new List<Button>();
 			AIScore = 0;
 			playerScore = 0;
@@ -121,6 +123,40 @@ namespace CheckersProject {
 			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 		}
 
+		/*
+		Multi-move implementation...
+		DONE
+		no loop needed
+		remove ai turn from button_Click function
+		lock the selection to the new location when move is made
+		set a flag to prevent user from clicking it off
+
+
+		TODO
+		make button to end turn
+		when clicked, start AI turn
+		rename button_Click function to something more descriptive
+		
+		use flag to prevent user from making normal moves again, only captures and only if they work
+
+		highlight end turn button when the first successful move has completed, even if there is another move to play. consistency
+
+		invalid move = no restrictions, run all code
+		normal move = lock selection lock all moves
+		capture move = lock selection lock normal moves, allow capture moves
+
+		normal ( if invalid
+		capture ( if invalid or capture 
+
+		
+		*/
+
+		private void endTurn_Click(object sender, EventArgs e) {
+			if (playerTurn) {
+				playerTurn = false;
+				AITurn();
+			}
+		}
 
 		private void button_Click(object sender, EventArgs e) {
 			if (playerTurn) {
@@ -135,39 +171,45 @@ namespace CheckersProject {
 					}
 				}
 				else if (selected == button) { //undo first click, misclick, etc. 
-					selected.FlatStyle = FlatStyle.Flat;
-					selected = null;
+					if (moveStatus == "invalid") {
+						selected.FlatStyle = FlatStyle.Flat;
+						selected = null;
+					}
 				}
 				else {
 					Boolean validMove = false;
 					//check move for left column exception
 					if (selected.TabIndex % 8 == 0) {
 						//normal move check
-						if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
+						if (moveStatus == "invalid" && selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//king normal down move
-						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//capture move check
-						else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						//king capture down move
-						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex + 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						else {
@@ -177,38 +219,44 @@ namespace CheckersProject {
 					//check move for 2nd left column exception
 					else if (selected.TabIndex % 8 == 1) {
 						//normal move check
-						if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
+						if (moveStatus == "invalid" && selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
-						else if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//king normal downleft move
-						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//king normal downright move
-						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//capture move check
-						else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
 								|| flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						//king capture down move
-						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex + 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						else {
@@ -218,31 +266,35 @@ namespace CheckersProject {
 					//check move for right column exception
 					else if (selected.TabIndex % 8 == 7) {
 						//normal move check
-						if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
+						if (moveStatus == "invalid" && selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//king normal downleft move
-						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//capture move check
-						else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
 								playerScore++; 
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						//king capture down left
-						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex + 7].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						else {
@@ -252,38 +304,44 @@ namespace CheckersProject {
 					//check move for 2nd right column exception
 					else if (selected.TabIndex % 8 == 6) {
 						//normal move check
-						if (selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
+						if (moveStatus == "invalid" && selected.TabIndex == button.TabIndex + 9 && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
-						else if (selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.TabIndex == button.TabIndex + 7 && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//king normal downleft move
-						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7)) && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//king normal downright move
-						else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
+						else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 9)) && button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						//capture move check
-						else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						//king capture down left
-						else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
+						else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
 							if (flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RCoin"
 							|| flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RKing") {
 								flowLayoutPanel1.Controls[selected.TabIndex + 7].BackgroundImage = null;
 								flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag = null;
 								playerScore++;
 								validMove = true;
+								moveStatus = "captured";
 							}
 						}
 						else {
@@ -291,62 +349,68 @@ namespace CheckersProject {
 						}
 					}
 					//check normal move for all other cells
-					else if (selected.TabIndex == (button.TabIndex + 7) || selected.TabIndex == (button.TabIndex + 9)) {
+					else if (moveStatus == "invalid" && (selected.TabIndex == (button.TabIndex + 7) || selected.TabIndex == (button.TabIndex + 9))) {
 						if (button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						else {
 							validMove = false;
 						}
 					}
 					//check normal move for kings
-					else if (selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7) || selected.TabIndex == (button.TabIndex - 9))) {
+					else if (moveStatus == "invalid" && selected.Tag == "BKing" && (selected.TabIndex == (button.TabIndex - 7) || selected.TabIndex == (button.TabIndex - 9))) {
 						if (button.BackgroundImage == null) {
 							validMove = true;
+							moveStatus = "moved";
 						}
 						else {
 							validMove = false;
 						}
 					}
 					//check capture move up-left
-					else if (selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {//
+					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 18) && button.BackgroundImage == null) {//
 						if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
 						|| flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RKing") {
 							flowLayoutPanel1.Controls[selected.TabIndex - 9].BackgroundImage = null;
 							flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag = null;
 							playerScore++; 
 							validMove = true;
+							moveStatus = "captured";
 						}
 					}
 					//check capture move up-right
-					else if (selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
+					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 14) && button.BackgroundImage == null) {
 						if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
 						|| flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RKing") {
 							flowLayoutPanel1.Controls[selected.TabIndex - 7].BackgroundImage = null;
 							flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag = null;
 							playerScore++; 
 							validMove = true;
+							moveStatus = "captured";
 						}
 					}
 					//check king capture down-left
-					else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
+					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 14) && button.BackgroundImage == null) {
 						if (flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RCoin"
 						|| flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag == "RKing") {
 							flowLayoutPanel1.Controls[selected.TabIndex + 7].BackgroundImage = null;
 							flowLayoutPanel1.Controls[selected.TabIndex + 7].Tag = null;
 							playerScore++;
 							validMove = true;
+							moveStatus = "captured";
 						}
 					}
 					//check king capture down-right
 					//king capture down move
-					else if (selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
+					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing" && selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
 						if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
 						|| flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RKing") {
 							flowLayoutPanel1.Controls[selected.TabIndex + 9].BackgroundImage = null;
 							flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag = null;
 							playerScore++;
 							validMove = true;
+							moveStatus = "captured";
 						}
 					}
 					else {
@@ -359,9 +423,11 @@ namespace CheckersProject {
 						selected.BackgroundImage = null;
 						selected.Tag = null;
 						selected = null;
-						playerTurn = false;
+						//testing
+						selected = button;
+						button.FlatStyle = FlatStyle.Standard;
+						//end testing
 						label2.Text = "Player Score: "+playerScore.ToString();
-						AITurn(); //end player turn (might need and if() check for multi-moves above this)
 						label1.Text = "AI Score: " + AIScore.ToString();
 					}
 					else {
@@ -380,9 +446,6 @@ namespace CheckersProject {
 			int multi = 0;
 
 			updateAIData();
-
-			//side note, might need to do a "make kings" method call after each move for a multiplay 
-			//to enable a "capture move into the last slot, make king, then reverse direction into another capture" scenario possible
 
 			//try capture move
 			while (moveAvailable) {
