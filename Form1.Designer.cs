@@ -689,6 +689,7 @@
             // button36
             // 
             this.button36.BackColor = System.Drawing.Color.Black;
+            this.button36.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button36.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button36.FlatAppearance.BorderSize = 0;
             this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -697,7 +698,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(40, 40);
             this.button36.TabIndex = 35;
-            this.button36.Tag = "";
+            this.button36.Tag = "RCoin";
             this.button36.UseVisualStyleBackColor = false;
             this.button36.Click += new System.EventHandler(this.button_Click);
             // 
@@ -820,7 +821,6 @@
             // button45
             // 
             this.button45.BackColor = System.Drawing.Color.Black;
-            this.button45.BackgroundImage = global::CheckersProject.Properties.Resources.BKing;
             this.button45.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button45.FlatAppearance.BorderSize = 0;
             this.button45.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -829,7 +829,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(40, 40);
             this.button45.TabIndex = 44;
-            this.button45.Tag = "BKing";
+            this.button45.Tag = "";
             this.button45.UseVisualStyleBackColor = false;
             this.button45.Click += new System.EventHandler(this.button_Click);
             // 
@@ -952,7 +952,6 @@
             // button54
             // 
             this.button54.BackColor = System.Drawing.Color.Black;
-            this.button54.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button54.FlatAppearance.BorderSize = 0;
             this.button54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -961,7 +960,7 @@
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(40, 40);
             this.button54.TabIndex = 53;
-            this.button54.Tag = "RCoin";
+            this.button54.Tag = "";
             this.button54.UseVisualStyleBackColor = false;
             this.button54.Click += new System.EventHandler(this.button_Click);
             // 
@@ -1055,6 +1054,7 @@
             // button61
             // 
             this.button61.BackColor = System.Drawing.Color.Black;
+            this.button61.BackgroundImage = global::CheckersProject.Properties.Resources.BCoin;
             this.button61.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button61.FlatAppearance.BorderSize = 0;
             this.button61.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1063,7 +1063,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(40, 40);
             this.button61.TabIndex = 60;
-            this.button61.Tag = "";
+            this.button61.Tag = "BCoin";
             this.button61.UseVisualStyleBackColor = false;
             this.button61.Click += new System.EventHandler(this.button_Click);
             // 
