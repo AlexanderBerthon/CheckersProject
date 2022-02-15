@@ -7,7 +7,7 @@
     <ul>To Do for MVP:
       <ul><s>Create UI checkerboard design (icons, background images, etc.)</s></ul>
       <ul><s>Implement checkerboard front end (button grid / layout / etc.)</s></ul>
-      <ul>Gameplay
+      <ul><s>Gameplay</s>
         <ul><s>Player Controls</s>
           <ul><s>pawn movement</s></ul>
           <ul><s>pawn capture</s></ul>
@@ -26,10 +26,11 @@
         <ul><s>AI multi-turn moves</s></ul>
         <ul><s>AI points</s></ul>
       </ul>
-      <ul>Main Game Loop
-        <ul>Game over</ul>
-        <ul>Win condition</ul>
+      <ul><s>Main Game Loop</s>
+        <ul><s>Game over</s></ul>
+        <ul><s>Win condition</s></ul>
         <ul><s>Turn loop</s></ul>
+     Testing
   </section>
   <section> 
   *This is a very simplified list of necessary functionality for visibility's sake. More details found in commit messages.* 
