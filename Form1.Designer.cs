@@ -181,7 +181,7 @@
             this.button1.Size = new System.Drawing.Size(40, 40);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button_Click);
+            this.button1.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button2
             // 
@@ -197,7 +197,7 @@
             this.button2.TabIndex = 1;
             this.button2.Tag = "RCoin";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button_Click);
+            this.button2.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button3
             // 
@@ -211,7 +211,7 @@
             this.button3.Size = new System.Drawing.Size(40, 40);
             this.button3.TabIndex = 2;
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button_Click);
+            this.button3.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button4
             // 
@@ -227,7 +227,7 @@
             this.button4.TabIndex = 3;
             this.button4.Tag = "RCoin";
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button_Click);
+            this.button4.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button5
             // 
@@ -241,7 +241,7 @@
             this.button5.Size = new System.Drawing.Size(40, 40);
             this.button5.TabIndex = 4;
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button_Click);
+            this.button5.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button6
             // 
@@ -257,7 +257,7 @@
             this.button6.TabIndex = 5;
             this.button6.Tag = "RCoin";
             this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button_Click);
+            this.button6.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button7
             // 
@@ -271,7 +271,7 @@
             this.button7.Size = new System.Drawing.Size(40, 40);
             this.button7.TabIndex = 6;
             this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button_Click);
+            this.button7.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button8
             // 
@@ -287,7 +287,7 @@
             this.button8.TabIndex = 7;
             this.button8.Tag = "RCoin";
             this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button_Click);
+            this.button8.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button9
             // 
@@ -303,7 +303,7 @@
             this.button9.TabIndex = 8;
             this.button9.Tag = "RCoin";
             this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.button_Click);
+            this.button9.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button10
             // 
@@ -317,7 +317,7 @@
             this.button10.Size = new System.Drawing.Size(40, 40);
             this.button10.TabIndex = 9;
             this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button_Click);
+            this.button10.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button11
             // 
@@ -333,7 +333,7 @@
             this.button11.TabIndex = 10;
             this.button11.Tag = "RCoin";
             this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button_Click);
+            this.button11.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button12
             // 
@@ -347,7 +347,7 @@
             this.button12.Size = new System.Drawing.Size(40, 40);
             this.button12.TabIndex = 11;
             this.button12.UseVisualStyleBackColor = false;
-            this.button12.Click += new System.EventHandler(this.button_Click);
+            this.button12.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button13
             // 
@@ -363,7 +363,7 @@
             this.button13.TabIndex = 12;
             this.button13.Tag = "RCoin";
             this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.button_Click);
+            this.button13.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button14
             // 
@@ -377,7 +377,7 @@
             this.button14.Size = new System.Drawing.Size(40, 40);
             this.button14.TabIndex = 13;
             this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button_Click);
+            this.button14.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button15
             // 
@@ -393,7 +393,7 @@
             this.button15.TabIndex = 14;
             this.button15.Tag = "RCoin";
             this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.button_Click);
+            this.button15.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button16
             // 
@@ -407,7 +407,7 @@
             this.button16.Size = new System.Drawing.Size(40, 40);
             this.button16.TabIndex = 15;
             this.button16.UseVisualStyleBackColor = false;
-            this.button16.Click += new System.EventHandler(this.button_Click);
+            this.button16.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button17
             // 
@@ -421,7 +421,7 @@
             this.button17.Size = new System.Drawing.Size(40, 40);
             this.button17.TabIndex = 16;
             this.button17.UseVisualStyleBackColor = false;
-            this.button17.Click += new System.EventHandler(this.button_Click);
+            this.button17.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button18
             // 
@@ -437,7 +437,7 @@
             this.button18.TabIndex = 17;
             this.button18.Tag = "RCoin";
             this.button18.UseVisualStyleBackColor = false;
-            this.button18.Click += new System.EventHandler(this.button_Click);
+            this.button18.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button19
             // 
@@ -451,7 +451,7 @@
             this.button19.Size = new System.Drawing.Size(40, 40);
             this.button19.TabIndex = 18;
             this.button19.UseVisualStyleBackColor = false;
-            this.button19.Click += new System.EventHandler(this.button_Click);
+            this.button19.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button20
             // 
@@ -467,7 +467,7 @@
             this.button20.TabIndex = 19;
             this.button20.Tag = "RCoin";
             this.button20.UseVisualStyleBackColor = false;
-            this.button20.Click += new System.EventHandler(this.button_Click);
+            this.button20.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button21
             // 
@@ -481,7 +481,7 @@
             this.button21.Size = new System.Drawing.Size(40, 40);
             this.button21.TabIndex = 20;
             this.button21.UseVisualStyleBackColor = false;
-            this.button21.Click += new System.EventHandler(this.button_Click);
+            this.button21.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button22
             // 
@@ -497,7 +497,7 @@
             this.button22.TabIndex = 21;
             this.button22.Tag = "RCoin";
             this.button22.UseVisualStyleBackColor = false;
-            this.button22.Click += new System.EventHandler(this.button_Click);
+            this.button22.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button23
             // 
@@ -511,7 +511,7 @@
             this.button23.Size = new System.Drawing.Size(40, 40);
             this.button23.TabIndex = 22;
             this.button23.UseVisualStyleBackColor = false;
-            this.button23.Click += new System.EventHandler(this.button_Click);
+            this.button23.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button24
             // 
@@ -527,7 +527,7 @@
             this.button24.TabIndex = 23;
             this.button24.Tag = "RCoin";
             this.button24.UseVisualStyleBackColor = false;
-            this.button24.Click += new System.EventHandler(this.button_Click);
+            this.button24.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button25
             // 
@@ -541,7 +541,7 @@
             this.button25.Size = new System.Drawing.Size(40, 40);
             this.button25.TabIndex = 24;
             this.button25.UseVisualStyleBackColor = false;
-            this.button25.Click += new System.EventHandler(this.button_Click);
+            this.button25.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button26
             // 
@@ -555,7 +555,7 @@
             this.button26.Size = new System.Drawing.Size(40, 40);
             this.button26.TabIndex = 25;
             this.button26.UseVisualStyleBackColor = false;
-            this.button26.Click += new System.EventHandler(this.button_Click);
+            this.button26.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button27
             // 
@@ -570,7 +570,7 @@
             this.button27.TabIndex = 26;
             this.button27.Tag = "";
             this.button27.UseVisualStyleBackColor = false;
-            this.button27.Click += new System.EventHandler(this.button_Click);
+            this.button27.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button28
             // 
@@ -584,7 +584,7 @@
             this.button28.Size = new System.Drawing.Size(40, 40);
             this.button28.TabIndex = 27;
             this.button28.UseVisualStyleBackColor = false;
-            this.button28.Click += new System.EventHandler(this.button_Click);
+            this.button28.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button29
             // 
@@ -599,7 +599,7 @@
             this.button29.TabIndex = 28;
             this.button29.Tag = "";
             this.button29.UseVisualStyleBackColor = false;
-            this.button29.Click += new System.EventHandler(this.button_Click);
+            this.button29.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button30
             // 
@@ -613,7 +613,7 @@
             this.button30.Size = new System.Drawing.Size(40, 40);
             this.button30.TabIndex = 29;
             this.button30.UseVisualStyleBackColor = false;
-            this.button30.Click += new System.EventHandler(this.button_Click);
+            this.button30.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button31
             // 
@@ -628,7 +628,7 @@
             this.button31.TabIndex = 30;
             this.button31.Tag = "";
             this.button31.UseVisualStyleBackColor = false;
-            this.button31.Click += new System.EventHandler(this.button_Click);
+            this.button31.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button32
             // 
@@ -642,7 +642,7 @@
             this.button32.Size = new System.Drawing.Size(40, 40);
             this.button32.TabIndex = 31;
             this.button32.UseVisualStyleBackColor = false;
-            this.button32.Click += new System.EventHandler(this.button_Click);
+            this.button32.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button33
             // 
@@ -656,7 +656,7 @@
             this.button33.Size = new System.Drawing.Size(40, 40);
             this.button33.TabIndex = 32;
             this.button33.UseVisualStyleBackColor = false;
-            this.button33.Click += new System.EventHandler(this.button_Click);
+            this.button33.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button34
             // 
@@ -671,7 +671,7 @@
             this.button34.TabIndex = 33;
             this.button34.Tag = "";
             this.button34.UseVisualStyleBackColor = false;
-            this.button34.Click += new System.EventHandler(this.button_Click);
+            this.button34.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button35
             // 
@@ -685,12 +685,11 @@
             this.button35.Size = new System.Drawing.Size(40, 40);
             this.button35.TabIndex = 34;
             this.button35.UseVisualStyleBackColor = false;
-            this.button35.Click += new System.EventHandler(this.button_Click);
+            this.button35.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button36
             // 
             this.button36.BackColor = System.Drawing.Color.Black;
-            this.button36.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
             this.button36.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button36.FlatAppearance.BorderSize = 0;
             this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -699,9 +698,9 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(40, 40);
             this.button36.TabIndex = 35;
-            this.button36.Tag = "RCoin";
+            this.button36.Tag = "";
             this.button36.UseVisualStyleBackColor = false;
-            this.button36.Click += new System.EventHandler(this.button_Click);
+            this.button36.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button37
             // 
@@ -715,7 +714,7 @@
             this.button37.Size = new System.Drawing.Size(40, 40);
             this.button37.TabIndex = 36;
             this.button37.UseVisualStyleBackColor = false;
-            this.button37.Click += new System.EventHandler(this.button_Click);
+            this.button37.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button38
             // 
@@ -730,7 +729,7 @@
             this.button38.TabIndex = 37;
             this.button38.Tag = "";
             this.button38.UseVisualStyleBackColor = false;
-            this.button38.Click += new System.EventHandler(this.button_Click);
+            this.button38.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button39
             // 
@@ -744,7 +743,7 @@
             this.button39.Size = new System.Drawing.Size(40, 40);
             this.button39.TabIndex = 38;
             this.button39.UseVisualStyleBackColor = false;
-            this.button39.Click += new System.EventHandler(this.button_Click);
+            this.button39.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button40
             // 
@@ -759,11 +758,12 @@
             this.button40.TabIndex = 39;
             this.button40.Tag = "";
             this.button40.UseVisualStyleBackColor = false;
-            this.button40.Click += new System.EventHandler(this.button_Click);
+            this.button40.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button41
             // 
             this.button41.BackColor = System.Drawing.Color.Black;
+            this.button41.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button41.BackgroundImage")));
             this.button41.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button41.FlatAppearance.BorderSize = 0;
             this.button41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -772,9 +772,9 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(40, 40);
             this.button41.TabIndex = 40;
-            this.button41.Tag = "";
+            this.button41.Tag = "BCoin";
             this.button41.UseVisualStyleBackColor = false;
-            this.button41.Click += new System.EventHandler(this.button_Click);
+            this.button41.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button42
             // 
@@ -788,11 +788,12 @@
             this.button42.Size = new System.Drawing.Size(40, 40);
             this.button42.TabIndex = 41;
             this.button42.UseVisualStyleBackColor = false;
-            this.button42.Click += new System.EventHandler(this.button_Click);
+            this.button42.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button43
             // 
             this.button43.BackColor = System.Drawing.Color.Black;
+            this.button43.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button43.BackgroundImage")));
             this.button43.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button43.FlatAppearance.BorderSize = 0;
             this.button43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -801,9 +802,9 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(40, 40);
             this.button43.TabIndex = 42;
-            this.button43.Tag = "";
+            this.button43.Tag = "BCoin";
             this.button43.UseVisualStyleBackColor = false;
-            this.button43.Click += new System.EventHandler(this.button_Click);
+            this.button43.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button44
             // 
@@ -817,11 +818,12 @@
             this.button44.Size = new System.Drawing.Size(40, 40);
             this.button44.TabIndex = 43;
             this.button44.UseVisualStyleBackColor = false;
-            this.button44.Click += new System.EventHandler(this.button_Click);
+            this.button44.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button45
             // 
             this.button45.BackColor = System.Drawing.Color.Black;
+            this.button45.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button45.BackgroundImage")));
             this.button45.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button45.FlatAppearance.BorderSize = 0;
             this.button45.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -830,9 +832,9 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(40, 40);
             this.button45.TabIndex = 44;
-            this.button45.Tag = "";
+            this.button45.Tag = "BCoin";
             this.button45.UseVisualStyleBackColor = false;
-            this.button45.Click += new System.EventHandler(this.button_Click);
+            this.button45.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button46
             // 
@@ -846,11 +848,12 @@
             this.button46.Size = new System.Drawing.Size(40, 40);
             this.button46.TabIndex = 45;
             this.button46.UseVisualStyleBackColor = false;
-            this.button46.Click += new System.EventHandler(this.button_Click);
+            this.button46.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button47
             // 
             this.button47.BackColor = System.Drawing.Color.Black;
+            this.button47.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button47.BackgroundImage")));
             this.button47.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button47.FlatAppearance.BorderSize = 0;
             this.button47.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -859,9 +862,9 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(40, 40);
             this.button47.TabIndex = 46;
-            this.button47.Tag = "";
+            this.button47.Tag = "BCoin";
             this.button47.UseVisualStyleBackColor = false;
-            this.button47.Click += new System.EventHandler(this.button_Click);
+            this.button47.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button48
             // 
@@ -875,7 +878,7 @@
             this.button48.Size = new System.Drawing.Size(40, 40);
             this.button48.TabIndex = 47;
             this.button48.UseVisualStyleBackColor = false;
-            this.button48.Click += new System.EventHandler(this.button_Click);
+            this.button48.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button49
             // 
@@ -889,11 +892,12 @@
             this.button49.Size = new System.Drawing.Size(40, 40);
             this.button49.TabIndex = 48;
             this.button49.UseVisualStyleBackColor = false;
-            this.button49.Click += new System.EventHandler(this.button_Click);
+            this.button49.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button50
             // 
             this.button50.BackColor = System.Drawing.Color.Black;
+            this.button50.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button50.BackgroundImage")));
             this.button50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button50.FlatAppearance.BorderSize = 0;
             this.button50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -902,9 +906,9 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(40, 40);
             this.button50.TabIndex = 49;
-            this.button50.Tag = "";
+            this.button50.Tag = "BCoin";
             this.button50.UseVisualStyleBackColor = false;
-            this.button50.Click += new System.EventHandler(this.button_Click);
+            this.button50.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button51
             // 
@@ -918,12 +922,12 @@
             this.button51.Size = new System.Drawing.Size(40, 40);
             this.button51.TabIndex = 50;
             this.button51.UseVisualStyleBackColor = false;
-            this.button51.Click += new System.EventHandler(this.button_Click);
+            this.button51.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button52
             // 
             this.button52.BackColor = System.Drawing.Color.Black;
-            this.button52.BackgroundImage = global::CheckersProject.Properties.Resources.RCoin;
+            this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button52.BackgroundImage")));
             this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button52.FlatAppearance.BorderSize = 0;
             this.button52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -932,9 +936,9 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(40, 40);
             this.button52.TabIndex = 51;
-            this.button52.Tag = "RCoin";
+            this.button52.Tag = "BCoin";
             this.button52.UseVisualStyleBackColor = false;
-            this.button52.Click += new System.EventHandler(this.button_Click);
+            this.button52.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button53
             // 
@@ -948,11 +952,12 @@
             this.button53.Size = new System.Drawing.Size(40, 40);
             this.button53.TabIndex = 52;
             this.button53.UseVisualStyleBackColor = false;
-            this.button53.Click += new System.EventHandler(this.button_Click);
+            this.button53.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button54
             // 
             this.button54.BackColor = System.Drawing.Color.Black;
+            this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button54.BackgroundImage")));
             this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button54.FlatAppearance.BorderSize = 0;
             this.button54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -961,9 +966,9 @@
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(40, 40);
             this.button54.TabIndex = 53;
-            this.button54.Tag = "";
+            this.button54.Tag = "BCoin";
             this.button54.UseVisualStyleBackColor = false;
-            this.button54.Click += new System.EventHandler(this.button_Click);
+            this.button54.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button55
             // 
@@ -977,11 +982,12 @@
             this.button55.Size = new System.Drawing.Size(40, 40);
             this.button55.TabIndex = 54;
             this.button55.UseVisualStyleBackColor = false;
-            this.button55.Click += new System.EventHandler(this.button_Click);
+            this.button55.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button56
             // 
             this.button56.BackColor = System.Drawing.Color.Black;
+            this.button56.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button56.BackgroundImage")));
             this.button56.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button56.FlatAppearance.BorderSize = 0;
             this.button56.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -990,13 +996,14 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(40, 40);
             this.button56.TabIndex = 55;
-            this.button56.Tag = "";
+            this.button56.Tag = "BCoin";
             this.button56.UseVisualStyleBackColor = false;
-            this.button56.Click += new System.EventHandler(this.button_Click);
+            this.button56.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button57
             // 
             this.button57.BackColor = System.Drawing.Color.Black;
+            this.button57.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button57.BackgroundImage")));
             this.button57.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button57.FlatAppearance.BorderSize = 0;
             this.button57.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1005,9 +1012,9 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(40, 40);
             this.button57.TabIndex = 56;
-            this.button57.Tag = "";
+            this.button57.Tag = "BCoin";
             this.button57.UseVisualStyleBackColor = false;
-            this.button57.Click += new System.EventHandler(this.button_Click);
+            this.button57.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button58
             // 
@@ -1021,11 +1028,12 @@
             this.button58.Size = new System.Drawing.Size(40, 40);
             this.button58.TabIndex = 57;
             this.button58.UseVisualStyleBackColor = false;
-            this.button58.Click += new System.EventHandler(this.button_Click);
+            this.button58.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button59
             // 
             this.button59.BackColor = System.Drawing.Color.Black;
+            this.button59.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button59.BackgroundImage")));
             this.button59.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button59.FlatAppearance.BorderSize = 0;
             this.button59.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1034,9 +1042,9 @@
             this.button59.Name = "button59";
             this.button59.Size = new System.Drawing.Size(40, 40);
             this.button59.TabIndex = 58;
-            this.button59.Tag = "";
+            this.button59.Tag = "BCoin";
             this.button59.UseVisualStyleBackColor = false;
-            this.button59.Click += new System.EventHandler(this.button_Click);
+            this.button59.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button60
             // 
@@ -1050,12 +1058,12 @@
             this.button60.Size = new System.Drawing.Size(40, 40);
             this.button60.TabIndex = 59;
             this.button60.UseVisualStyleBackColor = false;
-            this.button60.Click += new System.EventHandler(this.button_Click);
+            this.button60.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button61
             // 
             this.button61.BackColor = System.Drawing.Color.Black;
-            this.button61.BackgroundImage = global::CheckersProject.Properties.Resources.BCoin;
+            this.button61.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button61.BackgroundImage")));
             this.button61.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button61.FlatAppearance.BorderSize = 0;
             this.button61.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1066,7 +1074,7 @@
             this.button61.TabIndex = 60;
             this.button61.Tag = "BCoin";
             this.button61.UseVisualStyleBackColor = false;
-            this.button61.Click += new System.EventHandler(this.button_Click);
+            this.button61.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button62
             // 
@@ -1080,11 +1088,12 @@
             this.button62.Size = new System.Drawing.Size(40, 40);
             this.button62.TabIndex = 61;
             this.button62.UseVisualStyleBackColor = false;
-            this.button62.Click += new System.EventHandler(this.button_Click);
+            this.button62.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button63
             // 
             this.button63.BackColor = System.Drawing.Color.Black;
+            this.button63.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button63.BackgroundImage")));
             this.button63.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button63.FlatAppearance.BorderSize = 0;
             this.button63.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1093,9 +1102,9 @@
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(40, 40);
             this.button63.TabIndex = 62;
-            this.button63.Tag = "";
+            this.button63.Tag = "BCoin";
             this.button63.UseVisualStyleBackColor = false;
-            this.button63.Click += new System.EventHandler(this.button_Click);
+            this.button63.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // button64
             // 
@@ -1109,7 +1118,7 @@
             this.button64.Size = new System.Drawing.Size(40, 40);
             this.button64.TabIndex = 63;
             this.button64.UseVisualStyleBackColor = false;
-            this.button64.Click += new System.EventHandler(this.button_Click);
+            this.button64.Click += new System.EventHandler(this.Boardbutton_Click);
             // 
             // label1
             // 
@@ -1146,6 +1155,7 @@
             this.button65.TabIndex = 4;
             this.button65.Text = "End Turn";
             this.button65.UseVisualStyleBackColor = true;
+            this.button65.Click += new System.EventHandler(this.endTurn_Click);
             // 
             // Form1
             // 
