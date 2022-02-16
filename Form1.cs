@@ -8,11 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/// <summary>
-/// might be a ghost king issue, tag is set but image is not? Might be related to making kings function. no proof yet just
-/// a hunch 
-/// 
-/// 
+/// BUGS
+/// end turn button causes unhandled exception when selected = null //I think
 
 
 /*
@@ -76,8 +73,6 @@ king movement logic
 7 9 9 9 9 9 9 8 
 3 6 6 6 6 6 6 4
 
-write crap code first, fix it later?
-
 col1 ~ i%8 = 0
 col2 ~ i%8 = 1
 col7 ~ i%8 = 6
@@ -122,13 +117,6 @@ namespace CheckersProject {
 			ButtonArray = new Button[64];
 			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 		}
-
-		/*
-		TODO
-		win condition
-		game over
-		highlight end turn button when the first successful move has completed, even if there is another move to play. consistency
-		*/
 
 		private void endTurn_Click(object sender, EventArgs e) {
 			if (playerTurn) {
@@ -639,7 +627,7 @@ namespace CheckersProject {
 
 							}
 
-							}
+						}
 					}
 					//update data and Isolate the piece that moved, the only piece the AI can "see" the second time around
 					//will be the one that move, ideally, meaning it is the only piece that can multi-move
@@ -651,9 +639,7 @@ namespace CheckersProject {
 								temp = button;
 							}
 						}
-						for (int i = 0; i < AIPieces.Count; i++) {
-							AIPieces.RemoveAt(i);
-						}
+						AIPieces.RemoveRange(0, AIPieces.Count);
 						AIPieces.Add(temp);
 					}
 				}
