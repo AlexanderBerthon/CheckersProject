@@ -9,7 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// BUGS
-/// end turn button causes unhandled exception when selected = null //I think
+/// AI Last piece just stuck at the bottom. wouldn't make a move
+///		after further testing, it isn't going out of range.. it just doesn't make a move. skips turn lol
+///		
+/// Try seeing if AI ever goes out of range, I can use this as a game ender as well. if it only goes out of range when it cannot make a move
+/// then the game is over anyway.
+/// but this will only work if it never goes out of range in error. 
+/// 
+/// 
+/// Issue with AI logic in bottom row, or maybe in general, it seems like the random array mixer doesnt work or might only work with normal 
+/// pieces and not kings? Logic is messed up and makes it very predictable 
 
 
 /*
@@ -119,7 +128,7 @@ namespace CheckersProject {
 		}
 
 		private void endTurn_Click(object sender, EventArgs e) {
-			if (playerTurn) {
+			if (playerTurn && moveStatus != "invalid") {
 				//update
 				flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 				//make kings
@@ -135,6 +144,9 @@ namespace CheckersProject {
 				selected = null;
 				AITurn();
 			}
+            else {
+				label3.Text = "Make a move first";
+            }
 		}
 
 		private void Boardbutton_Click(object sender, EventArgs e) {
@@ -646,14 +658,24 @@ namespace CheckersProject {
 				catch (ArgumentOutOfRangeException e) {
 					//this should NEVER happen with updated logic
 					Console.Error.WriteLine(e);
+					label3.Text = "CRITICAL ERROR";
 				}
 			}
+
+			updateAIData();
+
 			//try normal move
 			if (!moved) {
-				//this bit of code mixes up the AIPieces to make movements unpredictable
+				//this bit of code mixes up the AIPieces to make movements unpredictable 
+				///issue is at king bottom row, must be a logic error
+				///bot left works
+				///56    58    60    62
+				///56 works
+				///58, 60, and 62 don't work. ai turn literally just ends
 				Random random = new Random();
 				int randIndex = 0;
 				temp = null;
+
 				for (int i = 0; i < 25; i++) {
 					randIndex = random.Next(0, AIPieces.Count);
 					temp = AIPieces[randIndex];
@@ -671,18 +693,18 @@ namespace CheckersProject {
 								break;
 							}
 							//if in bot-right corner, try up left move
-							else if(button.TabIndex == 63 && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
+							else if(button.TabIndex == 62 && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
 								AIMove(button, -9);
 								break;
 							}
                             else {
 								//try up-right move
-								if (button.TabIndex == 56 && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
+								if (flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
 									AIMove(button, -7);
 									break;
 								}
 								//try up-left move
-								else if (button.TabIndex == 63 && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
+								else if (flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
 									AIMove(button, -9);
 									break;
 								}
@@ -691,39 +713,29 @@ namespace CheckersProject {
                         }
 						//if piece is in column 1
 						else if (button.TabIndex % 8 == 0) {
-							//attempt down-right move
-							if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
-								AIMove(button, 9);
-								break;
-							}
 							//if king attempt up-right move 
 							if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
 								AIMove(button, -7);
 								break;
 							}
+							//attempt down-right move
+							if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
+								AIMove(button, 9);
+								break;
+							}
 						}
 						//if piece is in column 8
 						else if (button.TabIndex % 8 == 7) {
-							//attempt down-left move
-							if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
-								AIMove(button, 7);
-								break;
-							}
 							//if king attempt up-left move
 							if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
 								AIMove(button, -9);
 								break;
 							}
-						}
-						//attempt down-left move.
-						else if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
-							AIMove(button, 7);
-							break;
-						}
-						//attempt down-right move.
-						else if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
-							AIMove(button, 9);
-							break;
+							//attempt down-left move
+							if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
+								AIMove(button, 7);
+								break;
+							}
 						}
 						//if king attempt up-left move
 						else if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
@@ -733,6 +745,16 @@ namespace CheckersProject {
 						//if king attempt up-right move 
 						else if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
 							AIMove(button, -7);
+							break;
+						}
+						//attempt down-left move.
+						else if (flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
+							AIMove(button, 7);
+							break;
+						}
+						//attempt down-right move.
+						else if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
+							AIMove(button, 9);
 							break;
 						}
 					}
@@ -800,6 +822,7 @@ namespace CheckersProject {
 			///the pieces are stored in a list to be used by the AI to make movements or captures
 			void updateAIData() {
 				flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
+				AIPieces.Clear();
 				foreach (Button button in ButtonArray) {
 					if (button.Tag == "RCoin" || button.Tag == "RKing") {
 						AIPieces.Add(button);
