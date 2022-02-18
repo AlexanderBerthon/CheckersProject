@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// This project replicates the game "checkers" using WinForms
+/// </summary>
 namespace CheckersProject {
 	public partial class Form1 : Form {
 		//Global Variables! I'm sorry!!
@@ -16,10 +19,8 @@ namespace CheckersProject {
 		String moveStatus;
 		List<Button> AIPieces;
 		Button[] ButtonArray;
-
 		int playerScore;
 		int AIScore;
-
 
 		public Form1() {
 			InitializeComponent();
@@ -29,11 +30,16 @@ namespace CheckersProject {
 			AIPieces = new List<Button>();
 			AIScore = 0;
 			playerScore = 0;
-
 			ButtonArray = new Button[64];
 			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 		}
 
+		/// <summary>
+		/// This event function triggers when the "end turn" button is clicked.
+		/// It will end the current player turn and begin the AI's turn
+		/// </summary>
+		/// <param name="sender"></param> The button object reference
+		/// <param name="e"></param> The event action arguments
 		private void endTurn_Click(object sender, EventArgs e) {
 			if (playerTurn && moveStatus != "invalid") {
 				//update
@@ -43,7 +49,6 @@ namespace CheckersProject {
 					if(ButtonArray[i].Tag == "BCoin") {
 						ButtonArray[i].BackgroundImage = Properties.Resources.BKing;
 						ButtonArray[i].Tag = "BKing";
-
 					}
 				}
 				playerTurn = false;
@@ -56,6 +61,12 @@ namespace CheckersProject {
             }
 		}
 
+		/// <summary>
+		/// This event function triggers when any grid button is clicked.
+		/// This function allows the player to move pieces by selecting the piece they want to move and then selecting the destination
+		/// </summary>
+		/// <param name="sender"></param> The button object reference
+		/// <param name="e"></param> The event action arguments
 		private void Boardbutton_Click(object sender, EventArgs e) {
 			if (playerTurn) {
 				Button button = (Button)sender;
@@ -282,7 +293,7 @@ namespace CheckersProject {
 							validMove = false;
 						}
 					}
-					//check capture move up-left
+					//check normal capture move up-left
 					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 18)
 					&& button.BackgroundImage == null) {
 						if (flowLayoutPanel1.Controls[selected.TabIndex - 9].Tag == "RCoin"
@@ -294,7 +305,7 @@ namespace CheckersProject {
 							moveStatus = "captured";
 						}
 					}
-					//check capture move up-right
+					//check normal capture move up-right
 					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.TabIndex == (button.TabIndex + 14)
 					&& button.BackgroundImage == null) {
 						if (flowLayoutPanel1.Controls[selected.TabIndex - 7].Tag == "RCoin"
@@ -319,7 +330,6 @@ namespace CheckersProject {
 						}
 					}
 					//check king capture down-right
-					//king capture down move
 					else if ((moveStatus == "invalid" || moveStatus == "captured") && selected.Tag == "BKing"
 					&& selected.TabIndex == (button.TabIndex - 18) && button.BackgroundImage == null) {
 						if (flowLayoutPanel1.Controls[selected.TabIndex + 9].Tag == "RCoin"
@@ -334,7 +344,7 @@ namespace CheckersProject {
 					else {
 						validMove = false;
 					}
-					if (validMove) {
+					if (validMove) { //execute
 						button.BackgroundImage = selected.BackgroundImage;
 						button.Tag = selected.Tag;
 						selected.FlatStyle = FlatStyle.Flat;
@@ -367,7 +377,7 @@ namespace CheckersProject {
 		}
 
 		public void AITurn() {
-			this.Refresh(); //must repaint manually, since this is called within a single click action
+			this.Refresh();
 			System.Threading.Thread.Sleep(1000);
 			Boolean moved = false;
 			Boolean moveAvailable = true;
@@ -561,8 +571,7 @@ namespace CheckersProject {
 					}
 				}
 				catch (ArgumentOutOfRangeException e) {
-					//this should NEVER happen with updated logic
-					Console.Error.WriteLine(e);
+					//this should never happen with updated logic
 					label3.Text = "CRITICAL ERROR";
 				}
 			}
@@ -610,8 +619,8 @@ namespace CheckersProject {
 								}
 							}
                         }
-						//if in top row (guaranteed king)
-						if (button.TabIndex <= 7) {
+						//if in top row - king range exception check
+						if (button.TabIndex <= 7 && button.Tag == "RKing") {
 							//if in top-left corner, try down-right move
 							if (button.TabIndex == 0 && flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
 								AIMove(button, 9);
@@ -684,7 +693,7 @@ namespace CheckersProject {
 					}
 				}
 				catch (ArgumentOutOfRangeException e) {
-					//this should never happen?
+					//this should never happen
 					label3.Text = "Normal Move Error";
 				}
 			}
@@ -700,10 +709,8 @@ namespace CheckersProject {
 			}
 
 			AIPieces.Clear();
-			//label1.Text = "your turn?";
 			playerTurn = true;
 			moveStatus = "invalid";
-
 
 			//check win condition
 			if (AIScore == 12) {
