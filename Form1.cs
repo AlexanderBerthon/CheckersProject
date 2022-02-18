@@ -8,99 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/// BUGS
-/// AI Last piece just stuck at the bottom. wouldn't make a move
-///		after further testing, it isn't going out of range.. it just doesn't make a move. skips turn lol
-///		
-/// Try seeing if AI ever goes out of range, I can use this as a game ender as well. if it only goes out of range when it cannot make a move
-/// then the game is over anyway.
-/// but this will only work if it never goes out of range in error. 
-/// 
-/// 
-/// Issue with AI logic in bottom row, or maybe in general, it seems like the random array mixer doesnt work or might only work with normal 
-/// pieces and not kings? Logic is messed up and makes it very predictable 
-
-
-/*
-TabIndex mapping
-00 01 02 03 04 05 06 07
-08 09 10 11 12 13 14 15
-16 17 18 19 20 21 22 23
-24 25 26 27 28 29 30 31 
-32 33 34 35 36 37 38 39
-40 41 42 43 44 45 46 47
-48 49 50 51 52 53 54 55
-56 57 58 59 60 61 62 63
-
-i % 8 mapping
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-0 1 2 3 4 5 6 7
-
-king capture logic
-1 = down-right
-2 = down-left
-3 = up-right
-4 = up-left
-5 = down-left or down-right
-6 = up-left or up-right
-7 = up-right or down-right
-8 = up-left or down-left
-9 = up-left or down-left or up-right or down-right
-
-1 1 5 5 5 5 2 2
-1 1 5 5 5 5 2 2
-7 7 9 9 9 9 8 8 
-7 7 9 9 9 9 8 8 
-7 7 9 9 9 9 8 8 
-7 7 9 9 9 9 8 8 
-3 3 6 6 6 6 4 4
-3 3 6 6 6 6 4 4 
-
-king movement logic
-1 = down-right
-2 = down-left
-3 = up-right
-4 = up-left
-5 = down-left or down-right
-6 = up-left or up-right
-7 = up-right or down-right
-8 = up-left or down-left
-9 = up-left or down-left or up-right or down-right
-
-1 5 5 5 5 5 5 2
-7 9 9 9 9 9 9 8
-7 9 9 9 9 9 9 8
-7 9 9 9 9 9 9 8
-7 9 9 9 9 9 9 8
-7 9 9 9 9 9 9 8
-7 9 9 9 9 9 9 8 
-3 6 6 6 6 6 6 4
-
-col1 ~ i%8 = 0
-col2 ~ i%8 = 1
-col7 ~ i%8 = 6
-col8 ~ i%8 = 7
-
-Top-down (AI)
-Left-Move	 index +7
-Right-Move	 index +9
-Left-Cap	 index +7, index +14
-Right-Cap	 index +9, index +18 
-
-Bot-up (p1)
-Left-Move	 index -9
-Right-Move	 index -7
-Left-Cap	 index -9, index -18
-Right-Cap	 index -7, index -14
-
-*/
-
 namespace CheckersProject {
 	public partial class Form1 : Form {
 		//Global Variables! I'm sorry!!
@@ -641,9 +548,7 @@ namespace CheckersProject {
 
 						}
 					}
-					//update data and Isolate the piece that moved, the only piece the AI can "see" the second time around
-					//will be the one that move, ideally, meaning it is the only piece that can multi-move
-					//might be bugged though, needs testing
+					//multi-move control. Only the piece that moved will be eligible to make another capture move. 
 					if (moveAvailable) {
 						updateAIData();
 						foreach (Button button in AIPieces) {
@@ -667,11 +572,6 @@ namespace CheckersProject {
 			//try normal move
 			if (!moved) {
 				//this bit of code mixes up the AIPieces to make movements unpredictable 
-				///issue is at king bottom row, must be a logic error
-				///bot left works
-				///56    58    60    62
-				///56 works
-				///58, 60, and 62 don't work. ai turn literally just ends
 				Random random = new Random();
 				int randIndex = 0;
 				temp = null;
@@ -685,7 +585,7 @@ namespace CheckersProject {
 
 				try {
 					foreach (Button button in AIPieces) {
-						//if in bottom row (guarenteed king) maybe
+						//if in bottom row (guaranteed king)
 						if(button.TabIndex >= 56) {
 							//if in bot-left corner, try up-right move
 							if(button.TabIndex == 56 && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
@@ -708,10 +608,34 @@ namespace CheckersProject {
 									AIMove(button, -9);
 									break;
 								}
-
 							}
                         }
-						//if piece is in column 1
+						//if in top row (guaranteed king)
+						if (button.TabIndex <= 7) {
+							//if in top-left corner, try down-right move
+							if (button.TabIndex == 0 && flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
+								AIMove(button, 9);
+								break;
+							}
+							//if in top-right corner, try down-left move
+							else if (button.TabIndex == 7 && flowLayoutPanel1.Controls[button.TabIndex + 7].BackgroundImage == null) {
+								AIMove(button, 7);
+								break;
+							}
+							else {
+								//try down-right move
+								if (flowLayoutPanel1.Controls[button.TabIndex + 9].BackgroundImage == null) {
+									AIMove(button, 9);
+									break;
+								}
+								//try down-left move
+								else if (flowLayoutPanel1.Controls[button.TabIndex +7].BackgroundImage == null) {
+									AIMove(button, 7);
+									break;
+								}
+							}
+						}
+						//if piece is in the first column
 						else if (button.TabIndex % 8 == 0) {
 							//if king attempt up-right move 
 							if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 7].BackgroundImage == null) {
@@ -724,7 +648,7 @@ namespace CheckersProject {
 								break;
 							}
 						}
-						//if piece is in column 8
+						//if piece is in the last column
 						else if (button.TabIndex % 8 == 7) {
 							//if king attempt up-left move
 							if (button.Tag == "RKing" && flowLayoutPanel1.Controls[button.TabIndex - 9].BackgroundImage == null) {
@@ -790,8 +714,6 @@ namespace CheckersProject {
 				label3.Text = "YOU LOSE!";
 			}
 
-
-			//can I just leave these here?
 			///This function modifies the game board data to display AI capture movement
 			void AICapture(Button start, int middle, int end) {
 				multi = start.TabIndex + end;
@@ -833,3 +755,91 @@ namespace CheckersProject {
 		}
 	}
 }
+
+/// BUGS
+///	AI "logic" is just pure randomness, no thought behind it at all
+///	
+/// If the game gets down to a single AI King, it will just loop between the top row and the row below it. back and forth forever unless
+///	the player sacrifices a piece to bait it out and capture it. 
+///	kind of janky
+///	
+
+/* NOTES
+TabIndex mapping
+00 01 02 03 04 05 06 07
+08 09 10 11 12 13 14 15
+16 17 18 19 20 21 22 23
+24 25 26 27 28 29 30 31 
+32 33 34 35 36 37 38 39
+40 41 42 43 44 45 46 47
+48 49 50 51 52 53 54 55
+56 57 58 59 60 61 62 63
+
+i % 8 mapping
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+0 1 2 3 4 5 6 7
+
+king capture logic
+1 = down-right
+2 = down-left
+3 = up-right
+4 = up-left
+5 = down-left or down-right
+6 = up-left or up-right
+7 = up-right or down-right
+8 = up-left or down-left
+9 = up-left or down-left or up-right or down-right
+
+1 1 5 5 5 5 2 2
+1 1 5 5 5 5 2 2
+7 7 9 9 9 9 8 8 
+7 7 9 9 9 9 8 8 
+7 7 9 9 9 9 8 8 
+7 7 9 9 9 9 8 8 
+3 3 6 6 6 6 4 4
+3 3 6 6 6 6 4 4 
+
+king movement logic
+1 = down-right
+2 = down-left
+3 = up-right
+4 = up-left
+5 = down-left or down-right
+6 = up-left or up-right
+7 = up-right or down-right
+8 = up-left or down-left
+9 = up-left or down-left or up-right or down-right
+
+1 5 5 5 5 5 5 2
+7 9 9 9 9 9 9 8
+7 9 9 9 9 9 9 8
+7 9 9 9 9 9 9 8
+7 9 9 9 9 9 9 8
+7 9 9 9 9 9 9 8
+7 9 9 9 9 9 9 8 
+3 6 6 6 6 6 6 4
+
+col1 ~ i%8 = 0
+col2 ~ i%8 = 1
+col7 ~ i%8 = 6
+col8 ~ i%8 = 7
+
+Top-down (AI)
+Left-Move	 index +7
+Right-Move	 index +9
+Left-Cap	 index +7, index +14
+Right-Cap	 index +9, index +18 
+
+Bot-up (p1)
+Left-Move	 index -9
+Right-Move	 index -7
+Left-Cap	 index -9, index -18
+Right-Cap	 index -7, index -14
+
+*/
