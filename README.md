@@ -4,7 +4,7 @@
     <h2>This project will attempt to replicate the game "Checkers"</h2>
   </section>
   <section>
-    <ul>To Do for MVP:
+    <ul><s>To Do for MVP:</s>
       <ul><s>Create UI checkerboard design (icons, background images, etc.)</s></ul>
       <ul><s>Implement checkerboard front end (button grid / layout / etc.)</s></ul>
       <ul><s>Gameplay</s>
@@ -30,10 +30,12 @@
         <ul><s>Game over</s></ul>
         <ul><s>Win condition</s></ul>
         <ul><s>Turn loop</s></ul>
-     Testing
+        </ul>
+        <s>Testing</s>
   </section>
-  <section> 
-  *This is a very simplified list of necessary functionality for visibility's sake. More details found in commit messages.* 
+
+  <section>
+  MVP is finished. Project complete. May return with updates at a later date.  
   </section>
 </html>
     
