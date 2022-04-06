@@ -93,7 +93,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button65 = new System.Windows.Forms.Button();
+            this.GameOverPanel = new System.Windows.Forms.Panel();
+            this.GameOverLabel = new System.Windows.Forms.Label();
+            this.PlayAgainLabel = new System.Windows.Forms.Label();
+            this.ContinueButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
+            this.GameOverPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -1154,12 +1160,65 @@
             this.button65.UseVisualStyleBackColor = true;
             this.button65.Click += new System.EventHandler(this.endTurn_Click);
             // 
+            // GameOverPanel
+            // 
+            this.GameOverPanel.Controls.Add(this.ExitButton);
+            this.GameOverPanel.Controls.Add(this.ContinueButton);
+            this.GameOverPanel.Controls.Add(this.PlayAgainLabel);
+            this.GameOverPanel.Controls.Add(this.GameOverLabel);
+            this.GameOverPanel.Location = new System.Drawing.Point(72, 100);
+            this.GameOverPanel.Name = "GameOverPanel";
+            this.GameOverPanel.Size = new System.Drawing.Size(200, 100);
+            this.GameOverPanel.TabIndex = 5;
+            this.GameOverPanel.Visible = false;
+            // 
+            // GameOverLabel
+            // 
+            this.GameOverLabel.AutoSize = true;
+            this.GameOverLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameOverLabel.Location = new System.Drawing.Point(47, 5);
+            this.GameOverLabel.Name = "GameOverLabel";
+            this.GameOverLabel.Size = new System.Drawing.Size(109, 29);
+            this.GameOverLabel.TabIndex = 0;
+            this.GameOverLabel.Text = "You Win!";
+            // 
+            // PlayAgainLabel
+            // 
+            this.PlayAgainLabel.AutoSize = true;
+            this.PlayAgainLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayAgainLabel.Location = new System.Drawing.Point(59, 49);
+            this.PlayAgainLabel.Name = "PlayAgainLabel";
+            this.PlayAgainLabel.Size = new System.Drawing.Size(92, 20);
+            this.PlayAgainLabel.TabIndex = 1;
+            this.PlayAgainLabel.Text = "Play Again?";
+            // 
+            // ContinueButton
+            // 
+            this.ContinueButton.Location = new System.Drawing.Point(3, 74);
+            this.ContinueButton.Name = "ContinueButton";
+            this.ContinueButton.Size = new System.Drawing.Size(75, 23);
+            this.ContinueButton.TabIndex = 2;
+            this.ContinueButton.Text = "Yes";
+            this.ContinueButton.UseVisualStyleBackColor = true;
+            this.ContinueButton.Click += new System.EventHandler(this.ContinueButton_Click);
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.Location = new System.Drawing.Point(122, 74);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExitButton.TabIndex = 3;
+            this.ExitButton.Text = "No";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(344, 361);
+            this.Controls.Add(this.GameOverPanel);
             this.Controls.Add(this.button65);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -1168,6 +1227,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.GameOverPanel.ResumeLayout(false);
+            this.GameOverPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1244,6 +1305,11 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button65;
+        private System.Windows.Forms.Panel GameOverPanel;
+        private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.Button ContinueButton;
+        private System.Windows.Forms.Label PlayAgainLabel;
+        private System.Windows.Forms.Label GameOverLabel;
     }
 }
 
