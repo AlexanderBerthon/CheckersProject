@@ -369,7 +369,9 @@ namespace CheckersProject {
 							btn.Enabled = false;
 						}
 						button65.Enabled = false;
-						label3.Text = "YOU WIN!";
+						GameOverLabel.Text = "YOU WIN!";
+						GameOverPanel.Visible = true;
+						//enable game over panel//////////////////////////////*******************************************************
 					}
 
 				}
@@ -718,7 +720,9 @@ namespace CheckersProject {
 					btn.Enabled = false;
 				}
 				button65.Enabled = false;
-				label3.Text = "YOU LOSE!";
+				GameOverLabel.Text = "YOU LOSE!";
+				GameOverPanel.Visible = true;
+				//enable game over panel ****************************************************************************************************
 			}
 
 			///This function modifies the game board data to display AI capture movement
@@ -760,7 +764,50 @@ namespace CheckersProject {
 			}
 
 		}
-	}
+
+        private void ContinueButton_Click(object sender, EventArgs e) {
+			//reset variables and restart the game state
+			foreach(Button btn in ButtonArray) {
+				btn.BackgroundImage = null;
+				btn.Tag = null;
+				btn.Enabled = true;
+				btn.FlatStyle = FlatStyle.Flat;
+
+			}
+			GameOverPanel.Visible = false;
+
+			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
+
+			int[] setupRed = { 1, 3, 5, 7, 8, 10, 12, 14, 17, 19, 21, 23};
+			int[] setupBlack = {40, 42, 44, 46, 49, 51, 53, 55, 56, 58, 60, 62 };
+			
+			foreach (int i in setupRed) {
+				ButtonArray[i].BackgroundImage = Properties.Resources.RCoin;
+				ButtonArray[i].Tag = "RCoin";
+			}
+		
+			foreach (int i in setupBlack) {
+				ButtonArray[i].BackgroundImage = Properties.Resources.BCoin;
+				ButtonArray[i].Tag = "BCoin";
+			}
+
+			InitializeComponent();
+			selected = null;
+			playerTurn = true;
+			moveStatus = "invalid";
+			AIPieces = new List<Button>();
+			AIScore = 0;
+			playerScore = 0;
+			ButtonArray = new Button[64];
+			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
+			label1.Text = "";
+			label2.Text = "";
+		}
+
+        private void ExitButton_Click(object sender, EventArgs e) {
+			Application.Exit();
+        }
+    }
 }
 
 /// BUGS
