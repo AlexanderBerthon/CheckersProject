@@ -767,6 +767,7 @@ namespace CheckersProject {
 
         private void ContinueButton_Click(object sender, EventArgs e) {
 			//reset variables and restart the game state
+			AIPieces.Clear();
 			foreach(Button btn in ButtonArray) {
 				btn.BackgroundImage = null;
 				btn.Tag = null;
@@ -790,18 +791,15 @@ namespace CheckersProject {
 				ButtonArray[i].BackgroundImage = Properties.Resources.BCoin;
 				ButtonArray[i].Tag = "BCoin";
 			}
-
-			InitializeComponent();
+			label1.Text = "";
+			label2.Text = "";
+			label3.Text = "";
+			button65.Enabled = true;
 			selected = null;
 			playerTurn = true;
 			moveStatus = "invalid";
-			AIPieces = new List<Button>();
 			AIScore = 0;
 			playerScore = 0;
-			ButtonArray = new Button[64];
-			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
-			label1.Text = "";
-			label2.Text = "";
 		}
 
         private void ExitButton_Click(object sender, EventArgs e) {
@@ -812,6 +810,12 @@ namespace CheckersProject {
 
 /// BUGS
 ///	AI "logic" is just pure randomness, no thought behind it at all
+///	
+/// AI Pawns sometimes capture upwards, act like a king
+/// 
+/// AI Kings not prioritizing capture over movement
+/// 
+/// AI Unresponsive on game restart
 ///	
 /// If the game gets down to a single AI King, it will just loop between the top row and the row below it. back and forth forever unless
 ///	the player sacrifices a piece to bait it out and capture it. 
