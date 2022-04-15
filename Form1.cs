@@ -371,7 +371,6 @@ namespace CheckersProject {
 						button65.Enabled = false;
 						GameOverLabel.Text = "YOU WIN!";
 						GameOverPanel.Visible = true;
-						//enable game over panel//////////////////////////////*******************************************************
 					}
 
 				}
@@ -722,7 +721,6 @@ namespace CheckersProject {
 				button65.Enabled = false;
 				GameOverLabel.Text = "YOU LOSE!";
 				GameOverPanel.Visible = true;
-				//enable game over panel ****************************************************************************************************
 			}
 
 			///This function modifies the game board data to display AI capture movement
@@ -765,6 +763,11 @@ namespace CheckersProject {
 
 		}
 
+		/// <summary>
+		/// This function resets game variables and starts the game anew, without having to relaunch the program.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void ContinueButton_Click(object sender, EventArgs e) {
 			//reset variables and restart the game state
 			AIPieces.Clear();
@@ -802,6 +805,11 @@ namespace CheckersProject {
 			playerScore = 0;
 		}
 
+		/// <summary>
+		/// This function exits the application when the user clicks the exit button on the game over menu
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void ExitButton_Click(object sender, EventArgs e) {
 			Application.Exit();
         }
@@ -814,8 +822,6 @@ namespace CheckersProject {
 /// AI Pawns sometimes capture upwards, act like a king
 /// 
 /// AI Kings not prioritizing capture over movement
-/// 
-/// AI Unresponsive on game restart
 ///	
 /// If the game gets down to a single AI King, it will just loop between the top row and the row below it. back and forth forever unless
 ///	the player sacrifices a piece to bait it out and capture it. 
