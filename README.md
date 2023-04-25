@@ -42,4 +42,15 @@
 https://user-images.githubusercontent.com/71737894/157351347-9e96da21-d760-4129-a90d-a57418b27b89.mp4
 
 
+__________________________________________________________________
+
+<H2>How to install:</H2>
+
+1. Download the entire 'publish' folder
+
+2. Run setup.exe
+
+__________________________________________________________________
+
+
     
