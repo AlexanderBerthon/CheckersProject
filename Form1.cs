@@ -8,24 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//bugs
-//error message doesn't go away
-//
-//improvements
-//game over ui is gross
-//
-//end turn button is kind of janky.. but I know it would be a PAIN to get rid of
-//
-//AI pawn? moved backwards in a game.. not sure how this happened
-//theory is that the piece was a king in a previous game and maintained that data
-//ie the data wasn't cleared on restart
-//needs additional testing to confirm
-//if true then should be easy enough to fix
-//if the same bug happens in the first game of the session there is a massive problem with the ai logic
-//
-//enemy pawn went from bottom left to up a row/right side. Illegal move / logic error
-//became queen, then wen't off the rails
-
 namespace CheckersProject {
 	public partial class Form1 : Form {
 		Button selected;
