@@ -8,12 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/// <summary>
-/// This project replicates the game "checkers" using WinForms
-/// </summary>
 namespace CheckersProject {
 	public partial class Form1 : Form {
-		//Global Variables! I'm sorry!!
 		Button selected;
 		Boolean playerTurn;//prevents click actions during AI move
 		String moveStatus;
@@ -34,14 +30,10 @@ namespace CheckersProject {
 			flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 		}
 
-		/// <summary>
-		/// This event function triggers when the "end turn" button is clicked.
-		/// It will end the current player turn and begin the AI's turn
-		/// </summary>
-		/// <param name="sender"></param> The button object reference
-		/// <param name="e"></param> The event action arguments
+		///ends the player's turn and begins the AI's turn
 		private void endTurn_Click(object sender, EventArgs e) {
-			if (playerTurn && moveStatus != "invalid") {
+            label3.Text = "";
+            if (playerTurn && moveStatus != "invalid") {
 				//update
 				flowLayoutPanel1.Controls.CopyTo(ButtonArray, 0);
 				//make kings
@@ -61,12 +53,7 @@ namespace CheckersProject {
             }
 		}
 
-		/// <summary>
-		/// This event function triggers when any grid button is clicked.
-		/// This function allows the player to move pieces by selecting the piece they want to move and then selecting the destination
-		/// </summary>
-		/// <param name="sender"></param> The button object reference
-		/// <param name="e"></param> The event action arguments
+		///movement function
 		private void Boardbutton_Click(object sender, EventArgs e) {
 			if (playerTurn) {
 				Button button = (Button)sender;
@@ -79,7 +66,8 @@ namespace CheckersProject {
 						button.FlatStyle = FlatStyle.Standard;
 					}
 				}
-				else if (selected == button) { //undo first click, misclick, etc. 
+				//undo first click / misclick
+				else if (selected == button) { 
 					if (moveStatus == "invalid") {
 						selected.FlatStyle = FlatStyle.Flat;
 						selected = null;
@@ -719,7 +707,7 @@ namespace CheckersProject {
 					btn.Enabled = false;
 				}
 				button65.Enabled = false;
-				GameOverLabel.Text = "YOU LOSE!";
+				GameOverLabel.Text = "YOU LOSE";
 				GameOverPanel.Visible = true;
 			}
 
@@ -763,11 +751,7 @@ namespace CheckersProject {
 
 		}
 
-		/// <summary>
-		/// This function resets game variables and starts the game anew, without having to relaunch the program.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		///restart game
         private void ContinueButton_Click(object sender, EventArgs e) {
 			//reset variables and restart the game state
 			AIPieces.Clear();
@@ -805,28 +789,11 @@ namespace CheckersProject {
 			playerScore = 0;
 		}
 
-		/// <summary>
-		/// This function exits the application when the user clicks the exit button on the game over menu
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
         private void ExitButton_Click(object sender, EventArgs e) {
 			Application.Exit();
         }
     }
 }
-
-/// BUGS
-///	AI "logic" is just pure randomness, no thought behind it at all
-///	
-/// AI Pawns sometimes capture upwards, act like a king
-/// 
-/// AI Kings not prioritizing capture over movement
-///	
-/// If the game gets down to a single AI King, it will just loop between the top row and the row below it. back and forth forever unless
-///	the player sacrifices a piece to bait it out and capture it. 
-///	kind of janky
-///	
 
 /* NOTES
 TabIndex mapping
